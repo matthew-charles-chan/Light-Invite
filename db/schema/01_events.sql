@@ -1,4 +1,5 @@
 -- Drop and recreate events table
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 DROP TABLE IF EXISTS events CASCADE;
 CREATE TABLE events (
