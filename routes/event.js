@@ -16,14 +16,6 @@ module.exports = (db) => {
       });
   });
 
-  router.get('/:id/dates', (req,res) => {
-    //is passeed event_id
-    //add creator dates to db queries
-    //get event title and display!
-    let templateVars = {};
-    res.render('dates');
-  });
-
   router.get('/:id/poll/:auth', (req,res) => {
     res.render('poll.ejs');
 
@@ -34,15 +26,12 @@ module.exports = (db) => {
   });
 
   router.post('/add', (req, res) =>{
-    //add event to database
-    //retrive event_id from database and redirct with that id
     const { title, description, duration, name, email } = req.body;
     let event = {title, description, duration};
     let user = { name, email};
     addEvent(event, user, db)
     .then(res => res.rows[0].event_id)
     .then(result => res.redirect(`/${result}/dates`));
-    //res.redirect(`/${event_id}/dates`);
   });
 
   router.post('/users', (req, res) =>{
@@ -50,6 +39,13 @@ module.exports = (db) => {
     //Send creator to poll page??
     //res.redirect('poll');
     res.send(req.body);
+  });
+
+  router.get('/:id/dates', (req,res) => {
+    //is passeed event_id
+    //add creator dates to db queries
+    //get event title and display!
+    res.send('Hello');
   });
 
 
