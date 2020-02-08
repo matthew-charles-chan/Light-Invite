@@ -53,12 +53,6 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/dates", (req, res) =>{
-  console.log(__dirname);
-  res.sendFile(__dirname + '/public/dates.html');
-});
-
-
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
