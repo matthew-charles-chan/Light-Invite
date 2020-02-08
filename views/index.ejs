@@ -14,9 +14,10 @@
   <body>
     <header>
       <h1>Schoodle</h1>
+      <button>Create Event</button>
     </header>
     <main>
-      <form action="">
+      <form action="/event/add" method='POST'>
         <label for="title">
           Title
           <input type="text" name='title'>
@@ -33,6 +34,7 @@
             Email
             <input type="email" name='email'>
         </label>
+        <button type='submit'>Select Dates</button>
       </form>
     </main>
   </body>
