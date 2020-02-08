@@ -16,20 +16,27 @@ module.exports = (db) => {
   });
 
   router.get('/:id/dates', (req,res) => {
-
+    //add queries
+    res.render(dates.ejs)
   });
 
-  router.get('/:id/polling', (req,res) => {
+  router.get('/:id/poll/:auth', (req,res) => {
+    res.render('poll.ejs');
 
   });
 
   router.get('/:id/date', (req,res) => {
-
+    res.render('meeting')
   });
 
   router.post('/add', (req, res) =>{
+    res.redirect(`/${1}/dates`);
+  });
+
+  router.post('/users', (req, res) =>{
     res.send(req.body);
   });
+
 
   return router;
 };
