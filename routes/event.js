@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const addEvent = require('../lib/queries.js')
+const addEvent = require('../lib/queries.js');
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
