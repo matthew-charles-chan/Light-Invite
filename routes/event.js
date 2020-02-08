@@ -1,5 +1,6 @@
 const express = require('express');
 const router  = express.Router();
+//const addEvent = require('../lib/queries.js')
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -35,10 +36,17 @@ module.exports = (db) => {
   router.post('/add', (req, res) =>{
     //add event to database
     //retrive event_id from database and redirct with that id
-    let event_id;
-    db.query(``)
-    .then(res => event_id = res.row[0].id)
-    res.redirect(`/${event_id}/dates`);
+    const { title, description, duration } = req.body;
+    let event = {title, description, duration};
+    let event_id = '';
+    db.query(`INSERT INTO events (title, description, duration) VALUES ($1, $2, $3) RETURNING *`,
+    [ event.title,
+      event.description,
+      event.duration
+    ])
+    .then(res => event_id += res.rows[0].id)
+    .then(result => res.redirect(`/${result}/dates`));
+    //res.redirect(`/${event_id}/dates`);
   });
 
   router.post('/users', (req, res) =>{
