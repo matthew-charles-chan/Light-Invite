@@ -1,5 +1,6 @@
 const express = require('express');
 const router  = express.Router();
+const path = require('path');
 const addEvent = require('../lib/queries.js')
 
 module.exports = (db) => {
@@ -30,8 +31,10 @@ module.exports = (db) => {
     let event = {title, description, duration};
     let user = { name, email};
     addEvent(event, user, db)
-    .then(res => res.rows[0].event_id)
-    .then(result => res.redirect(`/${result}/dates`));
+    .then(res => res.rows[0].event_id);
+    res.redirect('/dates');
+    // .then(result => res.redirect(`/${result}/dates`));
+
   });
 
   router.post('/users', (req, res) =>{
@@ -45,7 +48,7 @@ module.exports = (db) => {
     //is passeed event_id
     //add creator dates to db queries
     //get event title and display!
-    res.send('Hello');
+    res.sendFile(__dirname + "")
   });
 
 
