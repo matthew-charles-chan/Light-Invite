@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
   -----------------------------------------------------------------*/
 
   let calendarEl = document.getElementById('calendar');
-  var calendar = new Calendar(calendarEl, {
+  let calendar = new Calendar(calendarEl, {
     plugins: [ interactionPlugin, timeGridPlugin, dayGridPlugin, listPlugin, bootstrapPlugin],
     defaultView: 'timeGridWeek',
     header: {
@@ -42,8 +42,18 @@ document.addEventListener('DOMContentLoaded', function() {
         // if so, remove the element from the "Draggable Events" list
         arg.draggedEl.parentNode.removeChild(arg.draggedEl);
       }
+    },
+    eventAfterRender: function(eventObj, $el) {
+      $el.popover({
+        title: eventObj.title,
+        content: eventObj.description,
+        trigger: 'hover',
+        placement: 'top',
+        container: 'body'
+      });
     }
   });
-
   calendar.render();
+
 });
+

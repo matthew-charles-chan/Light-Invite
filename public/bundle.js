@@ -14460,7 +14460,7 @@ document.addEventListener('DOMContentLoaded', function() {
   -----------------------------------------------------------------*/
 
   let calendarEl = document.getElementById('calendar');
-  var calendar = new _fullcalendar_core__WEBPACK_IMPORTED_MODULE_5__["Calendar"](calendarEl, {
+  let calendar = new _fullcalendar_core__WEBPACK_IMPORTED_MODULE_5__["Calendar"](calendarEl, {
     plugins: [ _fullcalendar_interaction__WEBPACK_IMPORTED_MODULE_2__["default"], _fullcalendar_timegrid__WEBPACK_IMPORTED_MODULE_1__["default"], _fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_0__["default"], _fullcalendar_list__WEBPACK_IMPORTED_MODULE_3__["default"], _fullcalendar_bootstrap__WEBPACK_IMPORTED_MODULE_4__["default"]],
     defaultView: 'timeGridWeek',
     header: {
@@ -14478,11 +14478,21 @@ document.addEventListener('DOMContentLoaded', function() {
         // if so, remove the element from the "Draggable Events" list
         arg.draggedEl.parentNode.removeChild(arg.draggedEl);
       }
+    },
+    eventAfterRender: function(eventObj, $el) {
+      $el.popover({
+        title: eventObj.title,
+        content: eventObj.description,
+        trigger: 'hover',
+        placement: 'top',
+        container: 'body'
+      });
     }
   });
-
   calendar.render();
+
 });
+
 
 
 /***/ })
