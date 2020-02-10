@@ -2,44 +2,62 @@
 <html lang="en">
   <head>
     <title>Home Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap-style/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="bootstrap-style/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="bootstrap-style/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="bootstrap-style/css/stylish-portfolio.css" rel="stylesheet">
+
   </head>
 
   <body>
-    <header>
-      <h1>Schoodle</h1>
-      <button>Create Event</button>
+
+    <header class="masthead d-flex">
+      <div class="container text-center my-auto">
+        <h1>Schoodle</h1>
+        <p>The Easiest Way To Schedule Your Next Event</p>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#create">Create Event</a>
+      </div>
     </header>
-    <main>
-      <form action="/event/add" method='POST'>
-        <label for="title">
-          Title
-          <input type="text" name='title'>
-        </label>
-        <label for="description">
-            Description
-            <input type="text" name='description'>
-        </label>
-        <label for="duration">
-            Duration
-            <input type="text" name='duration'>
-        </label>
-        <label for="name">
-            Name
-            <input type="text" name='name'>
-        </label>
-        <label for="title">
-            Email
-            <input type="email" name='email'>
-        </label>
-        <button type='submit'>Select Dates</button>
-      </form>
-    </main>
+
+    <section class="content-section bg-light" id="create">
+      <div class="container text-center">
+          <form action="/event/add" method='POST'>
+            <label for="title" required>
+              Title
+              <input type="text" name='title'>
+            </label>
+            <label for="description">
+                Description
+                <input type="text" name='description'>
+            </label>
+            <label for="duration">
+                Duration
+                <input type="text" name='duration'>
+            </label>
+            <label for="name">
+                Name
+                <input type="text" name='name'>
+            </label>
+            <label for="title">
+                Email
+                <input type="email" name='email'>
+            </label>
+            <button type='submit'>Select Dates</button>
+          </form>
+      </div>
+    </section>
+
   </body>
+  <script type="text/javascript" src="bootstrap-style/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
 </html>

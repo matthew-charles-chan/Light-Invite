@@ -1,17 +1,12 @@
-import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+import bootstrapPlugin from '@fullcalendar/bootstrap';
+import { Calendar } from '@fullcalendar/core';
+
 
 document.addEventListener('DOMContentLoaded', function() {
-
-  let calendarEl = document.getElementById('calendar');
-
-  let calendar = new Calendar(calendarEl, {
-    plugins: [ dayGridPlugin, timeGridPlugin, listPlugin ]
-  });
-  let Calendar = FullCalendar.Calendar;
-  let Draggable = FullCalendarInteraction.Draggable
 
   /* initialize the external events
   -----------------------------------------------------------------*/
@@ -29,15 +24,17 @@ document.addEventListener('DOMContentLoaded', function() {
   -----------------------------------------------------------------*/
 
   let calendarEl = document.getElementById('calendar');
-  let calendar = new Calendar(calendarEl, {
-    plugins: [ 'interaction', 'timeGridPlugin'],
+  var calendar = new Calendar(calendarEl, {
+    plugins: [ interactionPlugin, timeGridPlugin, dayGridPlugin, listPlugin, bootstrapPlugin],
     defaultView: 'timeGridWeek',
     header: {
       left: 'prev,next today',
       center: 'title',
       right: ''
     },
-    editable: true,
+    defaultTimedEventDuration: '00:60:00',
+    forceEventDuration: true,
+    themeSystem: 'standard',
     droppable: true, // this allows things to be dropped onto the calendar
     drop: function(arg) {
       // is the "remove after drop" checkbox checked?
@@ -47,11 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   });
-  $('#calendar').fullCalendar({
-    defaultTimedEventDuration: '00:30:00',
-    forceEventDuration: true
-});
+
   calendar.render();
 });
-
-

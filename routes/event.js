@@ -17,6 +17,13 @@ module.exports = (db) => {
       });
   });
 
+  router.get('/:id/dates', (req,res) => {
+    //is passeed event_id
+    //add creator dates to db queries
+    //get event title and display!
+    res.render('dates.ejs');
+  });
+
   router.get('/:id/poll/:auth', (req,res) => {
     res.render('poll.ejs');
 
@@ -31,8 +38,8 @@ module.exports = (db) => {
     let event = {title, description, duration};
     let user = { name, email};
     addEvent(event, user, db)
-    .then(res => res.rows[0].event_id);
-    res.render('dates');
+    .then(res => res.rows[0].event_id)
+    res.redirect('/dates');
     // .then(result => res.redirect(`/${result}/dates`));
 
   });
@@ -44,12 +51,7 @@ module.exports = (db) => {
     res.send(req.body);
   });
 
-  router.get('/:id/dates', (req,res) => {
-    //is passeed event_id
-    //add creator dates to db queries
-    //get event title and display!
-    res.sendFile(__dirname + "")
-  });
+
 
 
   return router;
