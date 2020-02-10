@@ -25,11 +25,8 @@
     "express": "^4.17.1",
     "morgan": "^1.9.1",
     "node-sass-middleware": "^0.11.0",
-<<<<<<< HEAD
     "path": "^0.12.7",
-=======
     "nodemailer": "^6.4.2",
->>>>>>> a1f93dd2b2f7f1bdffd9da3c032f267514d6ec56
     "pg": "^6.4.2",
     "pg-native": "^3.0.0"
   },
