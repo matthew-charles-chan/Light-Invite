@@ -14456,14 +14456,28 @@ $(() =>{
   });
   /* initialize the calendar
   -----------------------------------------------------------------*/
+  // const getTime = () => {
 
-  console.log('heelo');
+  //   let duration = $('#calendar').data().duration.toString() || '60' ;
+  //   let time = '';
+  //   console.log('duration', duration, typeof(duration))
 
-  // read data-duration from html
-  let duration = $('#calendar').data().duration || 60 ;
-  let time = `00:${duration}:00`
+  //   if(duration.length < 2){
+  //     time += `00:${duration}:00`
+  //     console.log(time);
+  //   }
+  //   else if(duration.length >= 3 && duration.length < 4) {
+  //     time += `0${duration[0]}:${duration[1]}${duration[2]}:00`
+  //     console.log(time);
+  //   }
+  //   else if (duration.length >= 4) {
+  //     time += `${duration[0]}${duration[1]}:${duration[2]}${duration[3]}:00`
+  //   }
+  // }
 
-
+  let duration = $('#calendar').data().duration.toString() || '60' ;
+  let id = $('#calendar').data().id;
+  let time = `00:${duration}:00`;
 
   let calendarEl = document.getElementById('calendar');
   let calendar = new _fullcalendar_core__WEBPACK_IMPORTED_MODULE_5__["Calendar"](calendarEl, {
@@ -14478,26 +14492,19 @@ $(() =>{
     forceEventDuration: true,
     themeSystem: 'standard',
     droppable: true, // this allows things to be dropped onto the calendar
-    drop: function(arg) {
-      // is the "remove after drop" checkbox checked?
-      if (document.getElementById('drop-remove').checked) {
-        // if so, remove the element from the "Draggable Events" list
-        arg.draggedEl.parentNode.removeChild(arg.draggedEl);
-      }
-    },
-    eventAfterRender: function(eventObj, $el) {
-      $el.popover({
-        title: eventObj.title,
-        content: eventObj.description,
-        trigger: 'hover',
-        placement: 'top',
-        container: 'body'
-      });
+    drop: function(date) {
+      date.draggedEl.parentNode.removeChild(date.draggedEl);
+      addDate(date.dateStr);
     }
   });
   calendar.render();
 
+  const addDate = (dateStr) => {
+    $.post('/event/date', {date: dateStr, id});
+  }
+
 });
+
 
 
 

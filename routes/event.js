@@ -1,22 +1,9 @@
 const express = require('express');
 const router  = express.Router();
-
-const path = require('path');
-const addEvent = require('../lib/queries.js')
+const addEvent = require('../lib/queries.js');
+const addDate = require('../lib/queries.js');
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
 
   router.get('/:id/poll/:auth', (req,res) => {
     res.render('poll.ejs');
@@ -24,7 +11,7 @@ module.exports = (db) => {
   });
 
   router.get('/:id/date', (req,res) => {
-    res.render('meeting')
+    res.render('meeting');
   });
 
 
@@ -32,14 +19,14 @@ module.exports = (db) => {
     // get event
     let id = req.params.id;
     db.query('SELECT * FROM events WHERE id = $1', [id])
-    .then(result => {
-      let event = result.rows[0];
-      let templateVars = {title: event.title, duration: event.duration};
-      return res.render('dates', templateVars);
-    })
-
-    // setup template vars
-
+      .then(result => {
+        let event = result.rows[0];
+        let templateVars = {title: event.title, duration: event.duration, id: event.id};
+        return res.render('dates', templateVars);
+      })
+      .catch(err => {
+        res.json({error: err.message});
+      });
   });
 
   router.post('/', (req, res) =>{
@@ -47,18 +34,27 @@ module.exports = (db) => {
     let event = {title, description, duration};
     let user = { name, email};
 
-    return addEvent(event, user, db).then(result => {
+    return addEvent(event, user, db)
+    .then(result => {
       const id = result.rows[0].event_id;
       return res.redirect(`/event/${id}/dates`);
     });
 
   });
 
-  router.post('/users', (req, res) =>{
-    //add users to database
-    //Send creator to poll page??
-    //res.redirect('poll');
-    res.send(req.body);
+  router.post('/date', (req, res) => {
+    let date = req.body.date;
+    let id = req.body.id;
+    console.log(date);
+
+    return addDate(id, date, db)
+    .then(result => {
+      console.log(result.rows[0])
+    })
+    .catch(err => {
+      res.json({error: err.message});
+    });
+
   });
 
   return router;
