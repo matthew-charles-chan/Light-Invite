@@ -18,13 +18,6 @@ module.exports = (db) => {
       });
   });
 
-  router.get('/:id/dates', (req,res) => {
-    //is passeed event_id
-    //add creator dates to db queries
-    //get event title and display!
-    res.render('dates.ejs');
-  });
-
   router.get('/:id/poll/:auth', (req,res) => {
     res.render('poll.ejs');
 
@@ -34,13 +27,30 @@ module.exports = (db) => {
     res.render('meeting')
   });
 
-  router.post('/add', (req, res) =>{
+
+  router.get('/:id/dates', (req, res) =>{
+    // get event
+    let id = req.params.id;
+    db.query('SELECT * FROM events WHERE id = $1', [id])
+    .then(result => {
+      let event = result.rows[0];
+      let templateVars = {title: event.title, duration: event.duration};
+      return res.render('dates', templateVars);
+    })
+
+    // setup template vars
+
+  });
+
+  router.post('/', (req, res) =>{
     const { title, description, duration, name, email } = req.body;
     let event = {title, description, duration};
     let user = { name, email};
-    addEvent(event, user, db)
-    .then(res => res.rows[0].event_id)
-    .then(result => res.redirect(`/${result}/dates`));
+
+    return addEvent(event, user, db).then(result => {
+      const id = result.rows[0].event_id;
+      return res.redirect(`/event/${id}/dates`);
+    });
 
   });
 
@@ -51,8 +61,6 @@ module.exports = (db) => {
     res.send(req.body);
   });
 
-
-
-
   return router;
 };
+

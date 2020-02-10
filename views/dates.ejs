@@ -2,28 +2,28 @@
 <html>
 <head>
 <meta charset='utf-8' />
-<link href='@fullcalendar/core/main.css' rel='stylesheet' />
-<link href='@fullcalendar/daygrid/main.css' rel='stylesheet' />
-<link href='@fullcalendar/timegrid/main.css' rel='stylesheet' />
-<link href='@fullcalendar/list/main.css' rel='stylesheet' />
-<link href='@fullcalendar/bootstrap/main.css' rel='stylesheet' />
-<!-- <link rel="stylesheet" href="./styles/date.scss"> -->
-<script src='../public/bundle.js'></script>
-<style>
+<!-- FullCalendar CSS -->
+<link href='/@fullcalendar/core/main.css' rel='stylesheet' />
+<link href='/@fullcalendar/daygrid/main.css' rel='stylesheet' />
+<link href='/@fullcalendar/timegrid/main.css' rel='stylesheet' />
+<link href='/@fullcalendar/list/main.css' rel='stylesheet' />
+<link href='/@fullcalendar/bootstrap/main.css' rel='stylesheet' />
+<!-- Bootstrap Core CSS -->
+<link href="/bootstrap-style/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    body {
-      margin: 40px 10px;
-      padding: 0;
-      font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-      font-size: 14px;
-    }
+<!-- Custom Fonts -->
+<link href="/bootstrap-style/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+<link href="/bootstrap-style/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
 
-    #calendar {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-  </style>
+<!-- Custom CSS -->
+<link href="/bootstrap-style/css/stylish-portfolio.css" rel="stylesheet">
+<link href="/styles/date.css" rel="stylesheet" >
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src='/bundle.js'></script>
 </head>
 <body>
   <div id='wrap'>
@@ -37,9 +37,9 @@
       <h4>Draggable Events</h4>
 
       <div id='external-events-list'>
-        <div class='fc-event'>My Event 1</div>
-        <div class='fc-event'>My Event 2</div>
-        <div class='fc-event'>My Event 3</div>
+        <div class='fc-event'><%= title %></div>
+        <div class='fc-event'><%= title %></div>
+        <div class='fc-event'><%= title %></div>
       </div>
 
       <p>
@@ -48,7 +48,7 @@
       </p>
     </div>
 
-    <div id='calendar'></div>
+    <div id='calendar' data-duration = '<%= duration %>'</div>></div>
 
     <div style='clear:both'></div>
 

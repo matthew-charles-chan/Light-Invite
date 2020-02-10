@@ -5,9 +5,7 @@ import listPlugin from '@fullcalendar/list';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
 import { Calendar } from '@fullcalendar/core';
 
-
-document.addEventListener('DOMContentLoaded', function() {
-
+$(() =>{
   /* initialize the external events
   -----------------------------------------------------------------*/
 
@@ -23,6 +21,14 @@ document.addEventListener('DOMContentLoaded', function() {
   /* initialize the calendar
   -----------------------------------------------------------------*/
 
+  console.log('heelo');
+
+  // read data-duration from html
+  let duration = $('#calendar').data().duration || 60 ;
+  let time = `00:${duration}:00`
+
+
+
   let calendarEl = document.getElementById('calendar');
   let calendar = new Calendar(calendarEl, {
     plugins: [ interactionPlugin, timeGridPlugin, dayGridPlugin, listPlugin, bootstrapPlugin],
@@ -32,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
       center: 'title',
       right: ''
     },
-    defaultTimedEventDuration: '00:60:00',
+    defaultTimedEventDuration: time,
     forceEventDuration: true,
     themeSystem: 'standard',
     droppable: true, // this allows things to be dropped onto the calendar
@@ -56,4 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
   calendar.render();
 
 });
+
+
 
