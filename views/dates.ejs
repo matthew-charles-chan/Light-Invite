@@ -2,111 +2,28 @@
 <html>
 <head>
 <meta charset='utf-8' />
-<link href='../public/packages/core/main.css' rel='stylesheet' />
-<link href='../public/packages/daygrid/main.css' rel='stylesheet' />
-<link href='../public/packages/timegrid/main.css' rel='stylesheet' />
-<link href='../public/packages/list/main.css' rel='stylesheet' />
+<link href='@fullcalendar/core/main.css' rel='stylesheet' />
+<link href='@fullcalendar/daygrid/main.css' rel='stylesheet' />
+<link href='@fullcalendar/timegrid/main.css' rel='stylesheet' />
+<link href='@fullcalendar/list/main.css' rel='stylesheet' />
+<link href='@fullcalendar/bootstrap/main.css' rel='stylesheet' />
 <!-- <link rel="stylesheet" href="./styles/date.scss"> -->
-<script src='../public/packages/core/main.js'></script>
-<script src='../public/packages/interaction/main.js'></script>
-<script src='../public/packages/daygrid/main.js'></script>
-<script src='../public/packages/timegrid/main.js'></script>
-<script src='../public/packages/list/main.js'></script>
-<script>
-
-  document.addEventListener('DOMContentLoaded', function() {
-    let Calendar = FullCalendar.Calendar;
-    let Draggable = FullCalendarInteraction.Draggable
-
-    /* initialize the external events
-    -----------------------------------------------------------------*/
-
-    let containerEl = document.getElementById('external-events-list');
-    new Draggable(containerEl, {
-      itemSelector: '.fc-event',
-      eventData: function(eventEl) {
-        return {
-          title: eventEl.innerText.trim()
-        }
-      }
-    });
-    /* initialize the calendar
-    -----------------------------------------------------------------*/
-
-    let calendarEl = document.getElementById('calendar');
-    let calendar = new Calendar(calendarEl, {
-      plugins: [ 'interaction', 'timeGrid'],
-      defaultView: 'timeGridWeek',
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: ''
-      },
-      editable: true,
-      droppable: true, // this allows things to be dropped onto the calendar
-      drop: function(arg) {
-        // is the "remove after drop" checkbox checked?
-        if (document.getElementById('drop-remove').checked) {
-          // if so, remove the element from the "Draggable Events" list
-          arg.draggedEl.parentNode.removeChild(arg.draggedEl);
-        }
-      }
-    });
-    calendar.render();
-
-  });
-
-</script>
+<script src='../public/bundle.js'></script>
 <style>
 
-  body {
-    margin-top: 40px;
-    font-size: 14px;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-  }
+    body {
+      margin: 40px 10px;
+      padding: 0;
+      font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+      font-size: 14px;
+    }
 
-  #wrap {
-    width: 1100px;
-    margin: 0 auto;
-  }
+    #calendar {
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
-  #external-events {
-    float: left;
-    width: 150px;
-    padding: 0 10px;
-    border: 1px solid #ccc;
-    background: #eee;
-    text-align: left;
-  }
-
-  #external-events h4 {
-    font-size: 16px;
-    margin-top: 0;
-    padding-top: 1em;
-  }
-
-  #external-events .fc-event {
-    margin: 10px 0;
-    cursor: pointer;
-  }
-
-  #external-events p {
-    margin: 1.5em 0;
-    font-size: 11px;
-    color: #666;
-  }
-
-  #external-events p input {
-    margin: 0;
-    vertical-align: middle;
-  }
-
-  #calendar {
-    float: right;
-    width: 900px;
-  }
-
-</style>
+  </style>
 </head>
 <body>
   <div id='wrap'>
@@ -137,7 +54,7 @@
 
     <div class='users_email'>
       <h3>Enter Recipient Emails</h3>
-        <form action="/users" METHOD='POST'>
+        <form action="">
             <label for="email_1">
               Email:
               <input type="text" name='email_1'>
@@ -150,7 +67,6 @@
               Email:
                 <input type="text" name='email_3'>
             </label>
-            <button type="submit">Create Event</button>
         </form>
     </div>
 

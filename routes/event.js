@@ -1,6 +1,8 @@
 const express = require('express');
 const router  = express.Router();
-const addEvent = require('../lib/queries.js');
+
+const path = require('path');
+const addEvent = require('../lib/queries.js')
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -14,6 +16,13 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       });
+  });
+
+  router.get('/:id/dates', (req,res) => {
+    //is passeed event_id
+    //add creator dates to db queries
+    //get event title and display!
+    res.render('dates.ejs');
   });
 
   router.get('/:id/poll/:auth', (req,res) => {
@@ -31,7 +40,9 @@ module.exports = (db) => {
     let user = { name, email};
     addEvent(event, user, db)
     .then(res => res.rows[0].event_id)
-    .then(result => res.redirect(`/${result}/dates`));
+    res.redirect('/dates');
+    // .then(result => res.redirect(`/${result}/dates`));
+
   });
 
   router.post('/users', (req, res) =>{
@@ -41,12 +52,7 @@ module.exports = (db) => {
     res.send(req.body);
   });
 
-  router.get('/:id/dates', (req,res) => {
-    //is passeed event_id
-    //add creator dates to db queries
-    //get event title and display!
-    res.send('Hello');
-  });
+
 
 
   return router;

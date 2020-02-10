@@ -29,19 +29,21 @@ app.use("/styles", sass({
   debug: true,
   outputStyle: 'expanded'
 }));
-app.use(express.static("public"));
+
+// app.use(express.static("public"));
+app.use(express.static(__dirname + '/public'));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-//const usersRoutes = require("./routes/users");
-// const widgetsRoutes = require("./routes/widgets");
+const usersRoutes = require("./routes/users");
+const widgetsRoutes = require("./routes/widgets");
 const eventRoutes = require("./routes/event")
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/event", eventRoutes(db));
-//app.use("/api/users", usersRoutes(db));
-// app.use("/api/widgets", widgetsRoutes(db));
+app.use("/api/users", usersRoutes(db));
+app.use("/api/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -50,6 +52,10 @@ app.use("/event", eventRoutes(db));
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
   res.render("index");
+});
+
+app.get("/dates", (req, res) =>{
+  res.sendFile(__dirname + '/public/dates.html');
 });
 
 
