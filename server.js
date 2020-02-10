@@ -54,7 +54,7 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/dates", (req, res) =>{
+app.get("/:id/dates", (req, res) =>{
   res.sendFile(__dirname + '/public/dates.html');
 });
 

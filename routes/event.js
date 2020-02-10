@@ -40,8 +40,7 @@ module.exports = (db) => {
     let user = { name, email};
     addEvent(event, user, db)
     .then(res => res.rows[0].event_id)
-    res.redirect('/dates');
-    // .then(result => res.redirect(`/${result}/dates`));
+    .then(result => res.redirect(`/${result}/dates`));
 
   });
 
