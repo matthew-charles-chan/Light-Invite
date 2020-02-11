@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const { addEvent, addDate } = require('../lib/queries.js');
+const { addEvent, addDate, addUserGuest } = require('../lib/queries.js');
 
 module.exports = (db) => {
 
@@ -46,10 +46,24 @@ module.exports = (db) => {
 
     addDate(id, date, db)
     .then(result => {
-      console.log(result.rows[0]);
+
     })
     .catch(err => {
       res.json({error: err.message});
+    });
+
+  });
+
+  router.post('/users', (req, res) => {
+    let newid = req.headers.referer.slice(28, 64);
+    let users = req.body;
+    let emails = Object.values(users);
+    emails.forEach(email => {
+      addUserGuest(newid, email, db)
+      // .then(result => console.log(result.rows[0]))
+      // .catch(err => console.log(err));
+      console.log(email);
+
     });
 
   });

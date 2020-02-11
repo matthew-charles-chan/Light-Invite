@@ -49,18 +49,18 @@
 
     <div class='users_email'>
       <h3>Enter Recipient Emails</h3>
-        <form action="">
+        <form action="/event/users" method="POST">
             <label for="email_1">
               Email:
-              <input type="text" name='email_1'>
+              <input type="text" name='email_1' required>
             </label>
             <label for="email_2">
               Email:
-                <input type="text" name='email_2'>
+                <input type="text" name='email_2' required>
             </label>
             <label for="email_3">
               Email:
-                <input type="text" name='email_3'>
+                <input type="text" name='email_3' required>
             </label>
             <button type='submit'>Submit</button>
         </form>
