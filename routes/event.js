@@ -11,6 +11,7 @@ module.exports = (db) => {
     let auth = req.params.id;
     getStartEnd(auth, db)
     .then(result => {
+      console.log(result)
       let templateVars = {dates: result, user_id: auth}
       res.render('poll', templateVars);
     });
