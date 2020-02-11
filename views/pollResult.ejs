@@ -30,6 +30,17 @@
   </header>
   <main>
     <div class="pollDisplay">
+        <ul>
+            <% dates.forEach(date => { %>
+            <% let { start_time, end_time } = date; %>
+            <li> <%= start_time %> UNTIL <%= end_time %> </li>
+            <% }); %>
+        </ul>
+        <ul>
+          <% votes.forEach(vote => { %>
+            <li> <%= vote %> </li>
+          <% }) %>
+        </ul>
 
     </div>
 

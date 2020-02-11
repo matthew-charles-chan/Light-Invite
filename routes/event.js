@@ -1,10 +1,11 @@
 const express = require('express');
 const router  = express.Router();
 const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote} = require('../lib/queries.js');
-// const nodemailer = require('nodemailer');
 const { sendMail } = require('../nodemailer/mailFunctions')
 
 module.exports = (db) => {
+
+  // GET Routes
 
   router.get('/:id/poll/', (req,res) => {
     let auth = req.params.id;
@@ -24,7 +25,8 @@ module.exports = (db) => {
 
   router.get('/:id/pollResult', (req, res) => {
     let user_id = req.params.id;
-    res.render('pollResult', { user_id });
+    // db query to get dates and vote count for each date, pass as templateVar
+    res.render('pollResult', { user_id, dates: [{id: 1, start_time: '8:00', end_time: '9:00'}], votes: [1] });
   });
 
   router.get('/:id/dates', (req, res) =>{
@@ -40,6 +42,8 @@ module.exports = (db) => {
         res.json({error: err.message});
       });
   });
+
+  //POST Routes
 
   router.post('/', (req, res) =>{
     const { title, description, duration, name, email } = req.body;
@@ -58,13 +62,10 @@ module.exports = (db) => {
     let id = req.body.id;
 
     addDate(id, date, db)
-    .then(result => {
-
-    })
+    .then(result => {})
     .catch(err => {
       res.json({error: err.message});
     });
-
   });
 
   router.post('/users', (req, res) => {
@@ -101,6 +102,12 @@ module.exports = (db) => {
       }
     }
     res.redirect(`/event/${user_id}/pollResult`);
+  });
+
+  // Catch All Route
+
+  router.get('*', (req, res) => {
+    res.render('index');
   });
 
 
