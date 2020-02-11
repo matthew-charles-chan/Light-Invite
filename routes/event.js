@@ -110,10 +110,11 @@ module.exports = (db) => {
   });
 
 
-  router.get('/:userId/result', (req, res) => {
-    let userId = req.params.userId
-    getVoteCount(userId, db)
-    .then(response => console.log(response))
+  router.get('/:creatorId/result', (req, res) => {
+    let eventId = req.params.creatorId
+    pickDate(eventId, db)
+    .then(res => console.log(res));
+    // .then(response => console.log(response))
   });
 
   // Catch All Route
