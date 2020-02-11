@@ -23,3 +23,11 @@
 
 
 -- fa5597c2-1980-4d00-8312-0b4184a6f4e5
+
+
+SELECT a.id as date_id, a.event_id, a.start_time,
+  a.start_time + (select duration from events where events.id = a.event_id) * Interval '1 minute'
+  as end_time
+  FROM dates a
+  JOIN users on a.event_id = users.event_id
+  WHERE users.id = '410e6bda-686c-4902-be8c-6a66101c2804';
