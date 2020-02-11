@@ -8,24 +8,11 @@ module.exports = (db) => {
 
   router.get('/poll/:auth', (req,res) => {
     let auth = req.params.auth;
-    let sTimes = [];
-    let eTimes = [];
-    let templateVars = {};
     getStartEnd(auth, db)
     .then(result => {
-      results.forEach(date => {
-        let start = date.start_time;
-        let end = date.end_time;
-        sTimes.push(start);
-        eTimes.push(end);
-      });
-      templateVars["start"] = sTimes;
-      templateVars["end"] = eTimes;
-      res.render('poll', templateVars)
+      let templateVars = {dates: result}
+      res.render('poll', templateVars);
     });
-
-
-
   });
 
   router.get('/:id/date', (req,res) => {

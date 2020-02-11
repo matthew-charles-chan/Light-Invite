@@ -40,6 +40,12 @@
       <button type="submit"></button>
     </form>
 
+    <ul>
+        <% dates.forEach(date => { %>
+        <% let { id, start_time, end_time } = date; %>
+        <li> <b><%= id %></b> : <%= start_time %> <%= end_time %> </li>
+        <% }); %> </ul>
+
     <form action="">
       <label for="name">
         Enter Name:
