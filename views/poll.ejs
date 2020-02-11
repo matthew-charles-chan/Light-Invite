@@ -30,6 +30,7 @@
   </header>
   <main>
     <form action="/event/<%= user_id %>/poll" METHOD='POST'>
+      <div id='display-poll'></div>
       <ul>
           <% dates.forEach(date => { %>
           <% let { id, start_time, end_time } = date; %>
@@ -43,9 +44,6 @@
       </label>
       <button type="submit">Submit</button>
     </form>
-
-
-
   </main>
 
 </body>
