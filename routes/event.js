@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote} = require('../lib/queries.js');
+const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount} = require('../lib/queries.js');
 // const nodemailer = require('nodemailer');
 const { sendMail } = require('../nodemailer/mailFunctions')
 
@@ -103,7 +103,11 @@ module.exports = (db) => {
     res.redirect(`/event/${user_id}/pollResult`);
   });
 
-
+  router.get('/:userId/result', (req, res) => {
+    let userId = req.params.userId
+    getVoteCount(userId, db)
+    .then(response => console.log(response))
+  });
   return router;
 };
 

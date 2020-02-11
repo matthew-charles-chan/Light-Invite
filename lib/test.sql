@@ -34,9 +34,20 @@
 
 
 
-DELETE FROM votes
-  WHERE date_id = 1
-  AND user_id = '6ae6ae66-6edf-4467-b764-93865c53e32e';
+-- DELETE FROM votes
+--   WHERE date_id = 1
+--   AND user_id = '6ae6ae66-6edf-4467-b764-93865c53e32e';
 
-INSERT INTO votes (date_id, user_id)
-  VALUES (1, '6ae6ae66-6edf-4467-b764-93865c53e32e');
+-- INSERT INTO votes (date_id, user_id)
+--   VALUES (1, '6ae6ae66-6edf-4467-b764-93865c53e32e');
+
+SELECT date_id,
+    start_time,
+    start_time + (select duration from events where events.id = dates.event_id) * Interval '1 minute' as end_time,
+    sum(case when isAvailable = true then 1 else 0 end) as yes_count,
+    sum(case when isAvailable = false then 1 else 0 end) as no_count
+  from votes
+  JOIN users on user_id = users.id
+  JOIN dates on date_id = dates.id
+  where users.event_id = 'a6e2fce2-abae-4e63-9a29-5ca2c78a9ffd'
+group by date_id, dates.id;
