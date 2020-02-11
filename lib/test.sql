@@ -53,13 +53,33 @@
 -- group by date_id, dates.id;
 
 
-SELECT date_id,
-    to_char(start_time, 'Mon DD YYYY  HH24:MI') as start_time,
-    to_char(start_time + (select duration from events where events.id = dates.event_id) * Interval '1 minute', 'Mon DD YYYY  HH24:MI') as end_time,
-    sum(case when isAvailable = true then 1 else 0 end) as yes_count,
-    sum(case when isAvailable = false then 1 else 0 end) as no_count
-  from votes
-  JOIN users on user_id = users.id
-  JOIN dates on date_id = dates.id
-  where users.event_id = 'a6e2fce2-abae-4e63-9a29-5ca2c78a9ffd'
-group by date_id, dates.id;
+-- SELECT date_id,
+--     to_char(start_time, 'Mon DD YYYY  HH24:MI') as start_time,
+--     to_char(start_time + (select duration from events where events.id = dates.event_id) * Interval '1 minute', 'Mon DD YYYY  HH24:MI') as end_time,
+--     sum(case when isAvailable = true then 1 else 0 end) as yes_count,
+--     sum(case when isAvailable = false then 1 else 0 end) as no_count
+--   from votes
+--   JOIN users on user_id = users.id
+--   JOIN dates on date_id = dates.id
+--   where users.event_id = 'a6e2fce2-abae-4e63-9a29-5ca2c78a9ffd'
+-- group by date_id, dates.id;
+
+
+
+-- SELECT date_id,
+--       to_char(start_time, 'Mon DD YYYY  HH24:MI') as start_time,
+--       to_char(start_time + (select duration from events where events.id = dates.event_id) * Interval '1 minute', 'Mon DD YYYY  HH24:MI') as end_time,
+--       sum(case when isAvailable = true then 1 else 0 end) as yes_count,
+--       sum(case when isAvailable = false then 1 else 0 end) as no_count
+--       from votes
+--       JOIN dates on date_id = dates.id
+--       where dates.id = 14
+--       GROUP BY date_id, dates.id;
+--       -- group by date_id, dates.id
+
+
+
+ SELECT events.id
+  FROM events
+  JOIN users on events.id = users.event_id
+  WHERE users.id = '5a5dd1d0-64d7-4670-9626-e04aef5baece';
