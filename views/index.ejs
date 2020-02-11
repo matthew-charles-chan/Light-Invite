@@ -7,17 +7,17 @@
 
 
     <!-- Bootstrap Core CSS -->
-    <link href="bootstrap-style/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap-style/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="bootstrap-style/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/bootstrap-style/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href="bootstrap-style/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <link href="/bootstrap-style/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora|Poppins&display=swap" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="bootstrap-style/css/stylish-portfolio.css" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/index.css">
+    <link href="/bootstrap-style/css/stylish-portfolio.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/index.css">
 
   </head>
 
@@ -27,32 +27,36 @@
       <div class="container text-center my-auto">
         <h1>Schoodle</h1>
         <p>The Easiest Way To Schedule Your Next Event</p>
-        <a class="js-scroll-trigger" href="#create">Create Event</a>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#create">Create Event</a>
       </div>
     </header>
 
     <section id="create">
       <div class="container text-center">
+        <h2>Event Information</h2>
           <form action="/event" method='POST'>
             <label for="title" required>
-              Title
-              <input type="text" name='title' required>
+              <input type="text" name='title' required placeholder="Title">
             </label>
             <label for="description">
-                Description
-                <input type="text" name='description' required>
+                <input type="text" name='description' required placeholder="Description">
             </label>
             <label for="duration">
-                Duration
-                <input type="text" name='duration' required>
+                <select name="duration">
+                  <option value="" disabled selected hidden>Duration (Minutes)</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                  <option value="60">60</option>
+                  <option value="75">75</option>
+                  <option value="90">90</option>
+                </select>
             </label>
             <label for="name">
-                Name
-                <input type="text" name='name' required>
+                <input type="text" name='name' required placeholder="Name">
             </label>
             <label for="title">
-                Email
-                <input type="email" name='email' required>
+                <input type="email" name='email' required placeholder="Email">
             </label>
             <button type='submit' class="btn btn-xl btn-dark">Select Dates</button>
           </form>
