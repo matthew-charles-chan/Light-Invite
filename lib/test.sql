@@ -7,7 +7,6 @@ select a.id, a.event_id, a.start_time,
 
 
 
--- select * from users
 
 --     FROM dates
 --   JOIN events on events.id = event_id
