@@ -3,6 +3,5 @@ CREATE TABLE votes (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id  UUID REFERENCES users(id) ON DELETE CASCADE,
   date_id SERIAL REFERENCES dates(id) ON DELETE CASCADE,
-  yes_count INTEGER DEFAULT 0,
-  no_count INTEGER DEFAULT 0
+  isAvailable BOOLEAN DEFAULT false
 );
