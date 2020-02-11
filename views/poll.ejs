@@ -5,19 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <!-- Bootstrap Core CSS -->
-   <link href="bootstrap-style/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   <link href="/bootstrap-style/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
    <!-- Custom Fonts -->
-   <link href="bootstrap-style/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+   <link href="/bootstrap-style/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-   <link href="bootstrap-style/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+   <link href="/bootstrap-style/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css?family=Lora|Poppins&display=swap" rel="stylesheet">
 
    <!-- Custom CSS -->
-   <link href="bootstrap-style/css/stylish-portfolio.css" rel="stylesheet">
+   <link href="/bootstrap-style/css/stylish-portfolio.css" rel="stylesheet">
+   <link rel="stylesheet" href="/styles/poll.css">
   <title>Document</title>
 </head>
 <body>
+  <nav>
+    <h3>Schoodle</h3>
+    <p>Organize Your Event In A Few Simple Clicks</p>
+  </nav>
   <header>
     <h1>
       Select Preferred Availability
@@ -25,26 +30,16 @@
   </header>
   <main>
     <form action="/poll" METHOD='POST'>
-      <input type="radio" name='d1' value = 1>
-      <input type="radio" name='d1' value = 0>
-      <!-- Use EJS to enter date into label -->
-      <label for="d1"> Fri, 07 Feb 2020</label>
-      <input type="radio" name='d2' value = 1>
-      <input type="radio" name='d2' value = 0>
-        <!-- Use EJS to enter date into label -->
-      <label for="d2"> Fri, 08 Feb 2020</label>
-      <input type="radio" name='d3' value = 1>
-      <input type="radio" name='d3' value = 0>
-        <!-- Use EJS to enter date into label -->
-      <label for="d3"> Fri, 09 Feb 2020</label>
-      <button type="submit"></button>
+      <ul>
+          <% dates.forEach(date => { %>
+          <% let { id, start_time, end_time } = date; %>
+          <li> <input type="radio" name='d<%= id %>' value = 1> YES <input type="radio" name='d<%= id %>' value = 0> NO
+            <%= start_time %> UNTIL <%= end_time %> </li>
+          <% }); %>
+      </ul>
+      <button type="submit">Submit</button>
     </form>
 
-    <ul>
-        <% dates.forEach(date => { %>
-        <% let { id, start_time, end_time } = date; %>
-        <li> <b><%= id %></b> : <%= start_time %> <%= end_time %> </li>
-        <% }); %> </ul>
 
     <form action="">
       <label for="name">

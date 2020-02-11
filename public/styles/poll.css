@@ -1,0 +1,11 @@
+nav {
+  background-color: #21bdfd;
+  background-image: linear-gradient(19deg, #21bdfd 0%, #B721FF 100%);
+  display: block;
+  padding: 1rem;
+  color: white;
+}
+
+ul {
+  list-style-type: none;
+}
