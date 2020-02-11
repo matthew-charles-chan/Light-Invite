@@ -6,11 +6,11 @@ const { sendMail } = require('../nodemailer/mailFunctions')
 
 module.exports = (db) => {
 
-  router.get('/poll/:auth', (req,res) => {
+  router.get('/:auth/poll/', (req,res) => {
     let auth = req.params.auth;
     getStartEnd(auth, db)
     .then(result => {
-      let templateVars = {dates: result}
+      let templateVars = {dates: result, user_id: auth}
       res.render('poll', templateVars);
     });
   });
@@ -81,7 +81,7 @@ module.exports = (db) => {
     return res.redirect()
   });
 
-  router.post('/update', (req, res) => {
+  router.post('/:id/update', (req, res) => {
     let { name } = req.body;
 
   });
