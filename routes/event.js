@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate } = require('../lib/queries.js');
+const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, incrementNo, incrementYes } = require('../lib/queries.js');
 // const nodemailer = require('nodemailer');
 const { sendMail } = require('../nodemailer/mailFunctions')
 
@@ -81,9 +81,23 @@ module.exports = (db) => {
     return res.redirect()
   });
 
-  router.post('/:id/update', (req, res) => {
-    let { name } = req.body;
+  router.post('/:id/poll', (req, res) => {
 
+    let dates = req.body;
+
+    let { name } = req.body;
+    let user_id = req.params.id;
+    updateNameByUserId(name, user_id, db)
+    .then(result => console.log(result));
+
+    for(const date in dates){
+      if(dates[date] == 1){
+        incrementYes(date, user_id, db);
+      }
+      else if(dates[date] == 0){
+        incrementNo(date, user_id, db);
+      }
+    }
   });
 
   return router;
