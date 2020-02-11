@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote} = require('../lib/queries.js');
+const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, creatorId } = require('../lib/queries.js');
 const { sendMail } = require('../nodemailer/mailFunctions')
 
 module.exports = (db) => {
@@ -11,7 +11,6 @@ module.exports = (db) => {
     let auth = req.params.id;
     getStartEnd(auth, db)
     .then(result => {
-      console.log(result);
       let templateVars = {dates: result, user_id: auth}
       res.render('poll', templateVars);
     });
@@ -69,23 +68,25 @@ module.exports = (db) => {
   });
 
   router.post('/users', (req, res) => {
-    let newid = req.headers.referer.slice(28, 64);
+    let event_id = req.headers.referer.slice(28, 64);
     let users = req.body;
     let emails = Object.values(users);
     emails.forEach(email => {
-      addUserGuest(newid, email, db)
-      .then(results => getIdFromEmail(newid, results.rows[0].email, db))
+      addUserGuest(event_id, email, db)
+      .then(results => getIdFromEmail(event_id, results.rows[0].email, db))
       .then(response => {
         let email = response.email
         let user_id = response.user_id
         sendMail(email, user_id)
       });
     });
-    return res.redirect()
+
+    let creator_id;
+    creatorId(event_id, db)
+    .then(result => res.redirect(`/event/${result.rows[0].id}/pollResult`));
   });
 
   router.post('/:id/poll', (req, res) => {
-    console.log(req.body);
     let dates = req.body;
     let { name } = req.body;
     let user_id = req.params.id;
