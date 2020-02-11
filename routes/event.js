@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd } = require('../lib/queries.js');
+const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate } = require('../lib/queries.js');
 // const nodemailer = require('nodemailer');
 const { sendMail } = require('../nodemailer/mailFunctions')
 
@@ -19,6 +19,11 @@ module.exports = (db) => {
     res.render('meeting');
   });
 
+
+  router.get('/:id/pick', (req, res) => {
+    let id = req.params.id
+    pickDate(id, db)
+  })
 
   router.get('/:id/dates', (req, res) =>{
     // get event

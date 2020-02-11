@@ -18,7 +18,7 @@ const sendMail = function(email, user_id) {
     text: `Hi,
     You've been invited to an event! please follow this link to update your availibity
     <a href="localhost:8080/poll/${user_id}">CLICK HERE</a>`,
-    html:`<b>Hi! </b><br>You've been invited to an event</br><br>Please follow this link to update your availibity!</br><br><a href="http://localhost:8080/poll/${user_id}">CLICK HERE</a></br>`
+    html:`<b>Hi! </b><br>You've been invited to an event</br><br>Please follow this link to update your availibity!</br><br><a href="http://localhost:8080/event/poll/${user_id}">CLICK HERE</a></br>`
   };
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
