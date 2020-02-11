@@ -10,6 +10,7 @@ module.exports = (db) => {
     let auth = req.params.auth;
     getStartEnd(auth, db)
     .then(result => {
+      console.log(result);
       let templateVars = {dates: result, user_id: auth}
       res.render('poll', templateVars);
     });
@@ -82,9 +83,8 @@ module.exports = (db) => {
   });
 
   router.post('/:id/poll', (req, res) => {
-
+    console.log(req.body);
     let dates = req.body;
-
     let { name } = req.body;
     let user_id = req.params.id;
     updateNameByUserId(name, user_id, db)
