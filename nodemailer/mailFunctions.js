@@ -1,14 +1,3 @@
-
-// const addUserGuest = function (id, user, db) {
-//   return db.query(`INSERT INTO users (event_id, name, email, isCreator) VALUES ($1, $2, $3, $4) RETURNING *`,
-//   [ id,
-//     user.name,
-//     user.email
-//   ])
-// }
-
-
-
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
@@ -20,20 +9,16 @@ const transporter = nodemailer.createTransport({
 });
 
 
-let user1 = {
-  name: 'Matthew',
-  email: 'm.zj.chan@gmail.com',
-  id: '9de12b3b-1075-4b4b-be0e-27de280913f4'
-}
 
-const sendMail = function(user) {
+const sendMail = function(email, user_id) {
   var mailOptions = {
     from: 'midterm.labber@gmail.com',
-    to: user.email,
+    to: `${email}`,
     subject: "You've been invited to an event!",
-    text: `Hi ${user.name},
+    text: `Hi,
     You've been invited to an event! please follow this link to update your availibity
-    localhost:8080/${user.id}`
+    <a href="localhost:8080/poll/${user_id}">CLICK HERE</a>`,
+    html:`<b>Hi! </b><br>You've been invited to an event</br><br>Please follow this link to update your availibity!</br><br><a href="http://localhost:8080/poll/${user_id}">CLICK HERE</a></br>`
   };
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
@@ -44,30 +29,7 @@ const sendMail = function(user) {
   });
 }
 
-module.exports = { sendMail,user1 };
+module.exports = { sendMail, transporter};
 
-
-
-// var mailOptions = {
-//   from: 'midterm.labber@gmail.com',
-//   to: 'midterm.labber@gmail.com',
-//   subject: 'THIS IS A TEST',
-//   text: 'this is a test to see if i can send mail from a different file'
-// };
-
-
-
-
-
-
-// const sendMail = function() {
-//   transporter.sendMail(mailOptions, function(error, info){
-//     if (error) {
-//       console.log(error);
-//     } else {
-//       console.log('Email sent: ' + info.response);
-//     }
-//   });
-// }
 
 

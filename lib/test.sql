@@ -1,8 +1,8 @@
-select a.id, a.event_id, a.start_time,
-  a.start_time + (select duration from events where events.id = a.event_id) * Interval '1 minute'
-  as end_time
-  from dates a
-  where event_id = '7b9f7364-cc14-408f-b24b-cb55b6a3af4a';
+-- select a.id, a.event_id, a.start_time,
+--   a.start_time + (select duration from events where events.id = a.event_id) * Interval '1 minute'
+--   as end_time
+--   from dates a
+--   where event_id = '7b9f7364-cc14-408f-b24b-cb55b6a3af4a';
 
 
 
@@ -17,3 +17,9 @@ select a.id, a.event_id, a.start_time,
 
 
 -- datetime + variable * INTERVAL '1 day'
+
+
+-- SELECT users.id FROM users where event_id =  '7b9f7364-cc14-408f-b24b-cb55b6a3af4a' AND email = 'm.zj.chan@gmail.com';
+
+
+-- fa5597c2-1980-4d00-8312-0b4184a6f4e5
