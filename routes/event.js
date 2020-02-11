@@ -1,15 +1,18 @@
 const express = require('express');
 const router  = express.Router();
 const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd } = require('../lib/queries.js');
-const nodemailer = require('nodemailer');
-const { sendMail, transporter } = require('../nodemailer/mailFunctions')
+// const nodemailer = require('nodemailer');
+const { sendMail } = require('../nodemailer/mailFunctions')
 
 module.exports = (db) => {
 
   router.get('/poll/:auth', (req,res) => {
     let auth = req.params.auth;
+    getStartEnd(auth, db)
+    .then(result => {
+    });
 
-    res.render('poll.ejs');
+    //res.render('poll.ejs');
 
   });
 
