@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable } = require('../lib/queries.js');
+const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote} = require('../lib/queries.js');
 // const nodemailer = require('nodemailer');
 const { sendMail } = require('../nodemailer/mailFunctions')
 
@@ -92,6 +92,7 @@ module.exports = (db) => {
     .then(result => console.log(result));
 
     for(const date in dates){
+      DeleteVote(date, user_id, db);
       if(dates[date] == 1){
         makeAvailable(date, user_id, db);
       }
