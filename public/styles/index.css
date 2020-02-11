@@ -13,8 +13,13 @@ a {
 
 #create{
   background-color: #f8f9fa!important;
-  padding-top: 7.5rem;
-  padding-bottom: 7.5rem;
+  padding-top: 10.5rem;
+  padding-bottom: 10.5rem;
+  border-top-left-radius: 50px 25px;
+  border-top-right-radius: 50px 25px;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+
 }
 
 p{
@@ -38,6 +43,12 @@ input, select{
 .container{
   /* border: 5px solid #B727FB; */
   padding: 2rem;
+}
+
+main{
+  background-image: linear-gradient(199deg, #21bdfd 0%, #B721FF 100%);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 @media screen and (min-width: 600px){

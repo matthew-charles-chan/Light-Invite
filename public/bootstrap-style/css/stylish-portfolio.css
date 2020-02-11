@@ -101,7 +101,6 @@ h1{
   background-color: #21bdfd;
   background-image: linear-gradient(19deg, #21bdfd 0%, #B721FF 100%);
   color: white;
-
 }
 
 .masthead h1 {
@@ -327,7 +326,7 @@ a:hover, a:focus, a:active {
 }
 
 .btn-primary {
-  background-color: rgb(53, 211, 211) !important;
+  background-color: rgb(31, 187, 187) !important;
   color: #fff !important;
 }
 
