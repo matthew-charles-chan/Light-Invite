@@ -64,7 +64,9 @@ $(() =>{
   calendar.render();
 
   const addDate = (dateStr) => {
-    $.post('/event/date', {date: dateStr, id});
+    $.post('/event/date', {date: dateStr, id: id})
+    .done(res => console.log(res))
+    .fail(err => console.log(err));
   }
 
 });

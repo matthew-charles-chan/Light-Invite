@@ -1,7 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const addEvent = require('../lib/queries.js');
-const addDate = require('../lib/queries.js');
+const { addEvent, addDate } = require('../lib/queries.js');
 
 module.exports = (db) => {
 
@@ -34,8 +33,7 @@ module.exports = (db) => {
     let event = {title, description, duration};
     let user = { name, email};
 
-    return addEvent(event, user, db)
-    .then(result => {
+    return addEvent(event, user, db).then(result => {
       const id = result.rows[0].event_id;
       return res.redirect(`/event/${id}/dates`);
     });
@@ -45,17 +43,17 @@ module.exports = (db) => {
   router.post('/date', (req, res) => {
     let date = req.body.date;
     let id = req.body.id;
-    console.log(date);
 
-    return addDate(id, date, db)
+    addDate(id, date, db)
     .then(result => {
-      console.log(result.rows[0])
+      console.log(result.rows[0]);
     })
     .catch(err => {
       res.json({error: err.message});
     });
 
   });
+
 
   return router;
 };
