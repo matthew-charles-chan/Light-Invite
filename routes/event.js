@@ -11,7 +11,6 @@ module.exports = (db) => {
     let auth = req.params.id;
     getStartEnd(auth, db)
     .then(result => {
-      console.log(result)
       let templateVars = {dates: result, user_id: auth}
       res.render('poll', templateVars);
     });
@@ -19,10 +18,12 @@ module.exports = (db) => {
 
   router.get('/:id/pollResult', (req, res) => {
     let user_id = req.params.id;
-    // db query to get dates and vote count for each date, pass as templateVar
     getVoteCount(user_id, db)
-    .then(result)
-    res.render('pollResult', { user_id, dates: [{id: 1, start_time: '8:00', end_time: '9:00'}], votes: [1] });
+    .then(result => {
+      let templateVars = {dates: result, user_id }
+      return res.render('pollResult', templateVars);
+    });
+
   });
 
   router.get('/:id/dates', (req, res) =>{
