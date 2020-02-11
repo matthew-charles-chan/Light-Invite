@@ -1,11 +1,8 @@
 const express = require('express');
 const router  = express.Router();
-<<<<<<< HEAD
-const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount} = require('../lib/queries.js');
+const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount, creatorId} = require('../lib/queries.js');
 // const nodemailer = require('nodemailer');
-=======
-const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, creatorId } = require('../lib/queries.js');
->>>>>>> master
+
 const { sendMail } = require('../nodemailer/mailFunctions')
 
 module.exports = (db) => {
@@ -16,6 +13,7 @@ module.exports = (db) => {
     let auth = req.params.id;
     getStartEnd(auth, db)
     .then(result => {
+      console.log(result)
       let templateVars = {dates: result, user_id: auth}
       res.render('poll', templateVars);
     });
