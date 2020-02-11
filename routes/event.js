@@ -75,11 +75,15 @@ module.exports = (db) => {
       .then(response => {
         let email = response.email
         let user_id = response.user_id
-        console.log(email, user_id);
         sendMail(email, user_id)
-      })
-
+      });
     });
+    return res.redirect()
+  });
+
+  router.post('/update', (req, res) => {
+    let { name } = req.body;
+
   });
 
   return router;
