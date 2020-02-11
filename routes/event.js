@@ -6,8 +6,8 @@ const { sendMail } = require('../nodemailer/mailFunctions')
 
 module.exports = (db) => {
 
-  router.get('/:auth/poll/', (req,res) => {
-    let auth = req.params.auth;
+  router.get('/:id/poll/', (req,res) => {
+    let auth = req.params.id;
     getStartEnd(auth, db)
     .then(result => {
       console.log(result);
@@ -16,15 +16,16 @@ module.exports = (db) => {
     });
   });
 
-  router.get('/:id/date', (req,res) => {
-    res.render('meeting');
-  });
-
 
   router.get('/:id/pick', (req, res) => {
     let id = req.params.id
     pickDate(id, db)
-  })
+  });
+
+  router.get('/:id/pollResult', (req, res) => {
+    let user_id = req.params.id;
+    res.render('pollResult', { user_id });
+  });
 
   router.get('/:id/dates', (req, res) =>{
     // get event
@@ -98,7 +99,9 @@ module.exports = (db) => {
         notAvailable(date, user_id, db);
       }
     }
+    res.redirect(`/event/${user_id}/pollResult`);
   });
+
 
   return router;
 };
