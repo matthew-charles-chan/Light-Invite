@@ -16,17 +16,21 @@ module.exports = (db) => {
     });
   });
 
-  router.get('/:id/pollResult', (req, res) => {
+  router.get('/:id/pollResult', async (req, res) => {
     let user_id = req.params.id;
-    let creator_id;
-    getEventIdWithUserId(user_id, db)
-    .then(result => result.rows[0].id)
+    let event_id = await getEventIdWithUserId(user_id, db);
+    let creator_id = await creatorId(event_id, db);
+    let templateVars = {};
 
-    // getVoteCount(user_id, db)
-    // .then(result => {
-    //   let templateVars = {dates: result, user_id }
-    //   return res.render('pollResult', templateVars);
-    // });
+    getVoteCount(user_id, db)
+    .then(result => {
+      if(user_id === creator_id){
+        user_id = undefined;
+      }
+      templateVars = {dates: result, user_id }
+      console.log(templateVars)
+      return res.render('pollResult', templateVars);
+    });
 
   });
 
