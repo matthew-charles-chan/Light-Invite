@@ -1,4 +1,15 @@
 form {
   background-color: white;
-  display: inline;
+  display: block;
+}
+
+a {
+  color: #B727FB;
+  background-color: rgb(248,249,250);
+}
+
+#create{
+  background-color: #f8f9fa!important;
+  padding-top: 7.5rem;
+  padding-bottom: 7.5rem;
 }
