@@ -1,6 +1,8 @@
-form {
+#create-event{
   background-color: white;
   display: block;
+
+  box-shadow: 0 0 5px 5px lightgray;
 }
 
 a {
@@ -25,7 +27,8 @@ label{
 }
 
 input, select{
-  width: 450px;
+  width: 350px;
+  outline: none;
   border-top-style: hidden;
   border-right-style: hidden;
   border-left-style: hidden;
@@ -35,4 +38,11 @@ input, select{
 .container{
   /* border: 5px solid #B727FB; */
   padding: 2rem;
+}
+
+@media screen and (min-width: 600px){
+
+  input, select{
+    width: 450px;
+  }
 }

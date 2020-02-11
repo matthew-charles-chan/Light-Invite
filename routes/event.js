@@ -1,8 +1,6 @@
 const express = require('express');
 const router  = express.Router();
 const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount, creatorId} = require('../lib/queries.js');
-// const nodemailer = require('nodemailer');
-
 const { sendMail } = require('../nodemailer/mailFunctions')
 
 module.exports = (db) => {
@@ -13,22 +11,19 @@ module.exports = (db) => {
     let auth = req.params.id;
     getStartEnd(auth, db)
     .then(result => {
-      console.log(result)
       let templateVars = {dates: result, user_id: auth}
       res.render('poll', templateVars);
     });
   });
 
-
-  router.get('/:id/pick', (req, res) => {
-    let id = req.params.id
-    pickDate(id, db)
-  });
-
   router.get('/:id/pollResult', (req, res) => {
     let user_id = req.params.id;
-    // db query to get dates and vote count for each date, pass as templateVar
-    res.render('pollResult', { user_id, dates: [{id: 1, start_time: '8:00', end_time: '9:00'}], votes: [1] });
+    getVoteCount(user_id, db)
+    .then(result => {
+      let templateVars = {dates: result, user_id }
+      return res.render('pollResult', templateVars);
+    });
+
   });
 
   router.get('/:id/dates', (req, res) =>{

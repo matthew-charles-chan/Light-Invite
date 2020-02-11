@@ -32,14 +32,9 @@
     <div class="pollDisplay">
         <ul>
             <% dates.forEach(date => { %>
-            <% let { start_time, end_time } = date; %>
-            <li> <%= start_time %> UNTIL <%= end_time %> </li>
+            <% let { start_time, end_time, yes_count, no_count } = date; %>
+            <li> YES : <%= yes_count%> NO: <%= no_count%> <%= start_time %> UNTIL <%= end_time %> </li>
             <% }); %>
-        </ul>
-        <ul>
-          <% votes.forEach(vote => { %>
-            <li> <%= vote %> </li>
-          <% }) %>
         </ul>
 
     </div>
