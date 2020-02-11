@@ -20,15 +20,13 @@ module.exports = (db) => {
     let user_id = req.params.id;
     let event_id = await getEventIdWithUserId(user_id, db);
     let creator_id = await creatorId(event_id, db);
-    let templateVars = {};
 
     getVoteCount(user_id, db)
     .then(result => {
       if(user_id === creator_id){
         user_id = undefined;
       }
-      templateVars = {dates: result, user_id }
-      console.log(templateVars)
+      let templateVars = {dates: result, user_id }
       return res.render('pollResult', templateVars);
     });
 
