@@ -1,16 +1,21 @@
 const express = require('express');
 const router  = express.Router();
+<<<<<<< HEAD
 const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount} = require('../lib/queries.js');
 // const nodemailer = require('nodemailer');
+=======
+const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, creatorId } = require('../lib/queries.js');
+>>>>>>> master
 const { sendMail } = require('../nodemailer/mailFunctions')
 
 module.exports = (db) => {
+
+  // GET Routes
 
   router.get('/:id/poll/', (req,res) => {
     let auth = req.params.id;
     getStartEnd(auth, db)
     .then(result => {
-      console.log(result);
       let templateVars = {dates: result, user_id: auth}
       res.render('poll', templateVars);
     });
@@ -24,7 +29,8 @@ module.exports = (db) => {
 
   router.get('/:id/pollResult', (req, res) => {
     let user_id = req.params.id;
-    res.render('pollResult', { user_id });
+    // db query to get dates and vote count for each date, pass as templateVar
+    res.render('pollResult', { user_id, dates: [{id: 1, start_time: '8:00', end_time: '9:00'}], votes: [1] });
   });
 
   router.get('/:id/dates', (req, res) =>{
@@ -40,6 +46,8 @@ module.exports = (db) => {
         res.json({error: err.message});
       });
   });
+
+  //POST Routes
 
   router.post('/', (req, res) =>{
     const { title, description, duration, name, email } = req.body;
@@ -58,33 +66,32 @@ module.exports = (db) => {
     let id = req.body.id;
 
     addDate(id, date, db)
-    .then(result => {
-
-    })
+    .then(result => {})
     .catch(err => {
       res.json({error: err.message});
     });
-
   });
 
   router.post('/users', (req, res) => {
-    let newid = req.headers.referer.slice(28, 64);
+    let event_id = req.headers.referer.slice(28, 64);
     let users = req.body;
     let emails = Object.values(users);
     emails.forEach(email => {
-      addUserGuest(newid, email, db)
-      .then(results => getIdFromEmail(newid, results.rows[0].email, db))
+      addUserGuest(event_id, email, db)
+      .then(results => getIdFromEmail(event_id, results.rows[0].email, db))
       .then(response => {
         let email = response.email
         let user_id = response.user_id
         sendMail(email, user_id)
       });
     });
-    return res.redirect()
+
+    let creator_id;
+    creatorId(event_id, db)
+    .then(result => res.redirect(`/event/${result.rows[0].id}/pollResult`));
   });
 
   router.post('/:id/poll', (req, res) => {
-    console.log(req.body);
     let dates = req.body;
     let { name } = req.body;
     let user_id = req.params.id;
@@ -103,11 +110,21 @@ module.exports = (db) => {
     res.redirect(`/event/${user_id}/pollResult`);
   });
 
+
   router.get('/:userId/result', (req, res) => {
     let userId = req.params.userId
     getVoteCount(userId, db)
     .then(response => console.log(response))
   });
+
+  // Catch All Route
+
+  router.get('*', (req, res) => {
+    res.render('index');
+  });
+
+
+
   return router;
 };
 
