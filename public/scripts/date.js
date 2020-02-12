@@ -4,6 +4,7 @@ import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
 import { Calendar } from '@fullcalendar/core';
+const moment = require('moment');
 
 $(() =>{
   /* initialize the external events
@@ -56,9 +57,18 @@ $(() =>{
     forceEventDuration: true,
     themeSystem: 'standard',
     droppable: true, // this allows things to be dropped onto the calendar
-    drop: function(date) {
-      date.draggedEl.parentNode.removeChild(date.draggedEl);
-      addDate(date.dateStr);
+    drop: function(day) {
+      day.draggedEl.parentNode.removeChild(day.draggedEl);
+      addDate(day.dateStr);
+
+    },
+    eventAllow: function(info, event) {
+      let date = Date.parse(info.start);
+      let current = Date.parse(new Date());
+      if(date < current ){
+        return false;
+      }
+      return true;
     }
   });
   calendar.render();
@@ -68,7 +78,6 @@ $(() =>{
     .done(res => console.log(res))
     .fail(err => console.log(err));
   }
-
 });
 
 

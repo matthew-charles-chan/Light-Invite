@@ -23,7 +23,6 @@ module.exports = (db) => {
       date['no_count'] = '0';
       output.push(date)
     });
-    console.log(output);
     return output;
   }
 
