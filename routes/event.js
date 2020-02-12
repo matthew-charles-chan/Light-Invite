@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount, creatorId} = require('../lib/queries.js');
+const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount, creatorId, getEventIdWithUserId} = require('../lib/queries.js');
 const { sendMail } = require('../nodemailer/mailFunctions')
 
 module.exports = (db) => {
@@ -16,10 +16,16 @@ module.exports = (db) => {
     });
   });
 
-  router.get('/:id/pollResult', (req, res) => {
+  router.get('/:id/pollResult', async (req, res) => {
     let user_id = req.params.id;
+    let event_id = await getEventIdWithUserId(user_id, db);
+    let creator_id = await creatorId(event_id, db);
+
     getVoteCount(user_id, db)
     .then(result => {
+      if(user_id === creator_id){
+        user_id = undefined;
+      }
       let templateVars = {dates: result, user_id }
       return res.render('pollResult', templateVars);
     });
@@ -78,8 +84,6 @@ module.exports = (db) => {
         sendMail(email, user_id)
       });
     });
-
-    let creator_id;
     creatorId(event_id, db)
     .then(result => res.redirect(`/event/${result.rows[0].id}/pollResult`));
   });

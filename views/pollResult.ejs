@@ -39,7 +39,11 @@
 
     </div>
 
-    <p>Update Availabilty<a href="/event/<%= user_id %>/poll"> Here</a></p>
+    <% if(user_id) { %>
+      <p>Update Availabilty<a href="/event/<%= user_id %>/poll"> Here</a></p>
+    <% } else { %>
+      <button>Close</button>
+    <% } %>
 
   </main>
 

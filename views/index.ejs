@@ -31,39 +31,40 @@
         <a class="btn btn-primary btn-xl js-scroll-trigger" href="#create">Create Event</a>
       </div>
     </header>
+    <main>
+        <section id="create">
+            <div class="container text-center" id='create-event'>
+              <h2>Your Event Information</h2>
+                <form action="/event" method='POST'>
+                  <label for="title" required>
+                    <input type="text" name='title' required placeholder="Title">
+                  </label>
+                  <label for="description">
+                      <input type="text" name='description' required placeholder="Description">
+                  </label>
+                  <label for="duration">
+                      <select name="duration">
+                        <option value="" disabled selected hidden>Duration (Minutes)</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                        <option value="60">60</option>
+                        <option value="75">75</option>
+                        <option value="90">90</option>
+                      </select>
+                  </label>
+                  <label for="name">
+                      <input type="text" name='name' required placeholder="Name">
+                  </label>
+                  <label for="title">
+                      <input type="email" name='email' required placeholder="Email">
+                  </label>
+                  <button type='submit' class="btn btn-xl btn-dark">Select Dates</button>
+                </form>
+            </div>
+          </section>
 
-    <section id="create">
-      <div class="container text-center" id='create-event'>
-        <h2>Event Information</h2>
-          <form action="/event" method='POST'>
-            <label for="title" required>
-              <input type="text" name='title' required placeholder="Title">
-            </label>
-            <label for="description">
-                <input type="text" name='description' required placeholder="Description">
-            </label>
-            <label for="duration">
-                <select name="duration">
-                  <option value="" disabled selected hidden>Duration (Minutes)</option>
-                  <option value="15">15</option>
-                  <option value="30">30</option>
-                  <option value="45">45</option>
-                  <option value="60">60</option>
-                  <option value="75">75</option>
-                  <option value="90">90</option>
-                </select>
-            </label>
-            <label for="name">
-                <input type="text" name='name' required placeholder="Name">
-            </label>
-            <label for="title">
-                <input type="email" name='email' required placeholder="Email">
-            </label>
-            <button type='submit' class="btn btn-xl btn-dark">Select Dates</button>
-          </form>
-      </div>
-    </section>
-
+    </main>
   </body>
    <!-- Bootstrap core JavaScript -->
    <script src="/bootstrap-style/vendor/jquery/jquery.min.js"></script>
