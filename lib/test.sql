@@ -120,6 +120,12 @@
 -- ;
 
 
-select users.name
-  from users
-  where event_id = '7b9f7364-cc14-408f-b24b-cb55b6a3af4a';
+-- select users.name
+--   from users
+--   where event_id = '7b9f7364-cc14-408f-b24b-cb55b6a3af4a';
+
+--get all date id's
+select  dates.id
+from dates
+JOIN users on
+where event_id = '3de9e40b-571f-4986-8618-d6a3bb3b1bd0';

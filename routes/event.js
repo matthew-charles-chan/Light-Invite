@@ -151,9 +151,11 @@ module.exports = (db) => {
 
   router.post('/:id/close', async(req, res) => {
     let user_id = req.params.id
-    let eventId = await getEventIdWithUserId(user_id, db)
+    let event_id = await getEventIdWithUserId(user_id, db)
+    console.log(event_id)
     let date = await pickDate(user_id, db)
-    getUsersInfoWithEventId(eventId, db)
+    console.log(date);
+    getUsersInfoWithEventId(event_id, db)
     .then(result => {
       result.forEach(user => {
         name = user.name;
