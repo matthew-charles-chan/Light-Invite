@@ -28,10 +28,10 @@
   </header>
   <main>
     <div>
-        <% let { start_time, end_time, yes_count} = result; %>
+        <% let { start_time, end_time, yes_count, title, description} = result; %>
         <p>
-          Title
-          Description
+          <%= title %>
+          <%= description %>
           Votes: <%= yes_count%> For <%= start_time %> UNTIL <%= end_time %>
         </p>
     </div>

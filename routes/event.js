@@ -140,6 +140,7 @@ module.exports = (db) => {
     .then(result => {
       res.render('result', { result })
     });
+
   });
 
 
