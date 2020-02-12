@@ -112,9 +112,14 @@
 --       GROUP BY date_id, dates.id, title, events.description;
 
 
-select event_id from users where id = 9551c619-c666-4b91-ba4d-e621dbeace89
+-- select event_id from users where id = 9551c619-c666-4b91-ba4d-e621dbeace89
 
-select name, email, (SELECT id from users where event_id = 'a6e2fce2-abae-4e63-9a29-5ca2c78a9ffd' and isCreator = true)
-FROM users
-where event_id = 'a6e2fce2-abae-4e63-9a29-5ca2c78a9ffd'
-;
+-- select name, email, (SELECT id from users where event_id = 'a6e2fce2-abae-4e63-9a29-5ca2c78a9ffd' and isCreator = true)
+-- FROM users
+-- where event_id = 'a6e2fce2-abae-4e63-9a29-5ca2c78a9ffd'
+-- ;
+
+
+select users.name
+  from users
+  where event_id = '7b9f7364-cc14-408f-b24b-cb55b6a3af4a';

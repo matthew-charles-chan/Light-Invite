@@ -28,12 +28,20 @@
   </header>
   <main>
     <div>
-        <% let { start_time, end_time, yes_count, title, description} = result; %>
+        <% let { start_time, end_time, yes_count, title, description, users} = result; %>
         <p>
           <%= title %>
           <%= description %>
           Votes: <%= yes_count%> For <%= start_time %> UNTIL <%= end_time %>
         </p>
+        <p>This event will be attended by:</p>
+        <ul>
+          <% result.users.forEach(user => { %>
+          <li>
+            <%= user %>
+          </li>
+          <% }) %>
+          </ul>
     </div>
 
   </main>
