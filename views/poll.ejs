@@ -16,6 +16,8 @@
    <!-- Custom CSS -->
    <link href="/bootstrap-style/css/stylish-portfolio.css" rel="stylesheet">
    <link rel="stylesheet" href="/styles/poll.css">
+
+
   <title>Document</title>
 </head>
 <body>
@@ -34,19 +36,45 @@
       <ul>
           <% dates.forEach(date => { %>
           <% let { id, start_time, end_time } = date; %>
-          <li> <input type="radio" name='<%= id %>' value = 1 required> YES <input type="radio" name='<%= id %>' value = 0 required> NO
+          <li> <input type="radio" name='<%= id %>' value = 1 > YES <input type="radio" name='<%= id %>' value = 0 > NO
             <%= start_time %> UNTIL <%= end_time %> </li>
           <% }); %>
       </ul>
+      <button type="submit">Submit</button>
       <% if(!user_name) { %>
       <label for="name">
         Enter Name:
         <input type="text" name='name'>
       </label>
-      <% } %>
       <button type="submit">Submit</button>
     </form>
-  </main>
-
+      <% } else { %>
+        <table>
+          <tr>
+            <th>Name:</th>
+            <td><%= user_name %></td>
+          </tr>
+          <tr>
+            <th>Email:</th>
+            <td><%= email%></td>
+          </tr>
+        </table>
+        <button type="button" id="updateInfo">Update</button>
+      <% } %>
+      <section id="updateSection">
+        <form action='/event/<%= user_id %>/updateInfo' method='POST'>
+          <label for="name">
+            Enter Name:
+            <input type="text" name='name'>
+          </label>
+          <label for="email">
+            Enter Email:
+            <input type="email" name='email'>
+          </label>
+          <button type="sumbit" id='update' formmethod="POST" formaction="/event/<%= user_id %>/updateInfo">UPDATE</button>
+        </form>
+      </section>
 </body>
+  <script src="/bootstrap-style/vendor/jquery/jquery.min.js"></script>
+  <script src="/scripts/poll.js"></script>
 </html>

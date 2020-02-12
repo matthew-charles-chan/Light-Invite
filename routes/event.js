@@ -1,19 +1,30 @@
 const express = require('express');
 const router  = express.Router();
-const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount, creatorId, getEventIdWithUserId, checkIfVoted, getUserInfoWithEventId , getNameByUserId} = require('../lib/queries.js');
+const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount, creatorId, getEventIdWithUserId, checkIfVoted, getUsersInfoWithEventId , getUserByUserId, updateEmailByUserId} = require('../lib/queries.js');
 const { sendMail, sendResultEmail } = require('../nodemailer/mailFunctions')
 
 module.exports = (db) => {
 
   // GET Routes
+  router.post('/:id/updateInfo', async (req, res) => {
+    let user_id = req.params.id
+    updateNameByUserId(req.body.name, user_id, db)
+    updateEmailByUserId(req.body.email, user_id, db)
+    res.redirect(`/event/${user_id}/poll`)
+    console.log(user_id)
+    console.log(req.body)
+
+
+
+  })
 
   router.get('/:id/poll/', async (req,res) => {
     let auth = req.params.id;
-    const name = await getNameByUserId(auth, db)
-    console.log(name)
+    const user = await getUserByUserId(auth, db)
+    console.log(user.name)
     await getStartEnd(auth, db)
     .then(result => {
-      let templateVars = {dates: result, user_id: auth, user_name: name }
+      let templateVars = {dates: result, user_id: auth, user_name: user.name, email: user.email }
       res.render('poll', templateVars);
     });
   });
@@ -119,8 +130,8 @@ module.exports = (db) => {
   router.post('/:id/poll', async (req, res) => {
     let dates = req.body;
     let user_id = req.params.id;
-    let user_name = await getNameByUserId(user_id, db)
-    if (!user_name) {
+    let user= await getUserByUserId(user_id, db)
+    if (!user.name) {
       let { name } = req.body;
       updateNameByUserId(name, user_id, db)
       .then(result => console.log(result));
@@ -142,7 +153,7 @@ module.exports = (db) => {
     let user_id = req.params.id
     let eventId = await getEventIdWithUserId(user_id, db)
     let date = await pickDate(user_id, db)
-    getUserInfoWithEventId(eventId, db)
+    getUsersInfoWithEventId(eventId, db)
     .then(result => {
       result.forEach(user => {
         name = user.name;
@@ -158,7 +169,7 @@ module.exports = (db) => {
     let user_id = req.params.id;
     let result = await pickDate(user_id, db);
     const eventId = await getEventIdWithUserId(user_id, db);
-    const users = await getUserInfoWithEventId(eventId, db);
+    const users = await getUsersInfoWithEventId(eventId, db);
     result.users = [];
     users.forEach(user => {
       result.users.push(user.name)

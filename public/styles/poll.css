@@ -9,3 +9,12 @@ nav {
 ul {
   list-style-type: none;
 }
+
+
+#updateSection {
+  display: none;
+}
+
+#updateSection.visable {
+  display: block;
+}
