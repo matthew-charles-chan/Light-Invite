@@ -98,8 +98,8 @@ h1{
   height: auto;
   padding-top: 8rem;
   padding-bottom: 8rem;
-  background-color: #21bdfd;
-  background-image: linear-gradient(19deg, #21bdfd 0%, #B721FF 100%);
+  background-color: #FEE140;
+  background-image: linear-gradient(45deg, #FEE140 0%, #FA709A 100%);
   color: white;
 }
 
@@ -326,7 +326,8 @@ a:hover, a:focus, a:active {
 }
 
 .btn-primary {
-  background-color: rgb(31, 187, 187) !important;
+  background-color: rgb(15, 161, 161) !important;
+  border-color: rgb(15, 161, 161) !important;
   color: #fff !important;
 }
 
