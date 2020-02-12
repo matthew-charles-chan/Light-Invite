@@ -55,6 +55,7 @@ body .fc {
 
 .fc-popover .fc-header .fc-title {
   margin: 0 2px;
+  color: antiquewhite;
 }
 
 .fc-popover .fc-header .fc-close {
@@ -267,6 +268,7 @@ temporary rendered events).
 .fc-event,
 .fc-event-dot {
   background-color: #6c757de0;
+
   /* default BACKGROUND color */
 }
 
@@ -578,7 +580,7 @@ TODO: more distinction between this file and common.css
 }
 
 .fc-unthemed td.fc-today {
-  background: #fdf2e1;
+  background: rgba(248, 126, 12, 0.24);
 }
 
 .fc-unthemed .fc-disabled-day {

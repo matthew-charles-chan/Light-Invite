@@ -1,34 +1,37 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
-#create-event {
+@import 'base';
+
+#create-event{
   background-color: white;
   display: block;
+
   box-shadow: 0 0 5px 5px lightgray;
 }
 
-p {
+p{
   font-size: 1.15rem;
 }
 
-#create {
-  background-color: #f8f9fa !important;
+#create{
+  background-color: #f8f9fa!important;
   padding-top: 7.5rem;
   padding-bottom: 7.5rem;
   border-top-left-radius: 50px 25px;
   border-top-right-radius: 50px 25px;
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
+
 }
 
-p {
+p{
   margin-bottom: 1rem;
 }
 
-label {
+label{
   display: block;
   margin: 2rem;
 }
 
-input, select {
+input, select{
   width: 350px;
   outline: none;
   border-top-style: hidden;
@@ -38,21 +41,21 @@ input, select {
   background-color: white;
 }
 
-.container {
+.container{
   /* border: 5px solid #B727FB; */
   padding: 2rem;
 }
 
-main {
+main{
   background-image: linear-gradient(225deg, #FEE140 0%, #FA709A 100%);
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
+
 }
 
-@media screen and (min-width: 600px) {
-  input, select {
+@media screen and (min-width: 600px){
+
+  input, select{
     width: 450px;
   }
 }
-
-/*# sourceMappingURL=index.css.map */
