@@ -62,7 +62,7 @@ $(() =>{
       addDate(day.dateStr);
 
     },
-    eventAllow: function(info, event) {
+    eventAllow: function(info) {
       let date = Date.parse(info.start);
       let current = Date.parse(new Date());
       if(date < current ){

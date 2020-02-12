@@ -13,7 +13,8 @@ body {
 
 #wrap {
   width: 900px;
-  margin: 0 auto;
+  display: flexbox;
+  justify-content: space-between
 }
 
 #external-events {
@@ -22,6 +23,7 @@ body {
   border: 1px solid #ccc;
   background: #eee;
   text-align: left;
+  margin-bottom: 1rem;
 }
 
 #external-events h4 {
