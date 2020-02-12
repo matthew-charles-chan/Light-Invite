@@ -13,7 +13,7 @@ module.exports = (db) => {
     console.log(name)
     await getStartEnd(auth, db)
     .then(result => {
-      let templateVars = {dates: result, user_id: auth, name: name }
+      let templateVars = {dates: result, user_id: auth, user_name: name }
       res.render('poll', templateVars);
     });
   });
@@ -117,12 +117,15 @@ module.exports = (db) => {
     .then(result => res.redirect(`/event/${result}/pollResult`));
   });
 
-  router.post('/:id/poll', (req, res) => {
+  router.post('/:id/poll', async (req, res) => {
     let dates = req.body;
-    let { name } = req.body;
     let user_id = req.params.id;
-    updateNameByUserId(name, user_id, db)
-    .then(result => console.log(result));
+    let user_name = await getNameByUserId(user_id, db)
+    if (!user_name) {
+      let { name } = req.body;
+      updateNameByUserId(name, user_id, db)
+      .then(result => console.log(result));
+    }
 
     for(const date in dates){
       DeleteVote(date, user_id, db);
