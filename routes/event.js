@@ -1,15 +1,15 @@
 const express = require('express');
 const router  = express.Router();
-const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount, creatorId, getEventIdWithUserId, checkIfVoted, getUserInfoWithEventId} = require('../lib/queries.js');
+const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount, creatorId, getEventIdWithUserId, checkIfVoted, getUserInfoWithEventId } = require('../lib/queries.js');
 const { sendMail, sendResultEmail } = require('../nodemailer/mailFunctions')
 
 module.exports = (db) => {
 
   // GET Routes
 
-  router.get('/:id/poll/', (req,res) => {
+  router.get('/:id/poll/', async (req,res) => {
     let auth = req.params.id;
-    getStartEnd(auth, db)
+    await getStartEnd(auth, db)
     .then(result => {
       let templateVars = {dates: result, user_id: auth}
       res.render('poll', templateVars);
@@ -134,27 +134,34 @@ module.exports = (db) => {
     res.redirect(`/event/${user_id}/pollResult`);
   });
 
-  router.post('/:id/close', (req, res) => {
+  router.post('/:id/close', async(req, res) => {
     let user_id = req.params.id
-    getEventIdWithUserId(user_id, db)
-    .then(res => getUserInfoWithEventId(res, db))
+    let eventId = await getEventIdWithUserId(user_id, db)
+    let date = await pickDate(user_id, db)
+    getUserInfoWithEventId(eventId, db)
     .then(result => {
       result.forEach(user => {
         name = user.name;
         email = user.email;
         id = user.id;
-        sendResultEmail(email, name, id)
+        sendResultEmail(email, name, date.title, date.start_time, date.description, id)
       })
     })
     res.redirect(`/event/${user_id}/close`);
   });
 
-  router.get('/:id/close', (req,res) =>{
+  router.get('/:id/close', async (req,res) =>{
     let user_id = req.params.id;
-    pickDate(user_id, db)
-    .then(result => {
-      res.render('result', { result })
-    });
+    let result = await pickDate(user_id, db);
+    const eventId = await getEventIdWithUserId(user_id, db);
+    const users = await getUserInfoWithEventId(eventId, db);
+    result.users = [];
+    users.forEach(user => {
+      result.users.push(user.name)
+    })
+
+    res.render('result', { result })
+
   });
 
 
