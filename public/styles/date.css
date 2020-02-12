@@ -1,8 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+nav {
+  background-color: #21bdfd;
+  background-image: linear-gradient(19deg, #21bdfd 0%, #B721FF 100%);
+  display: block;
+  padding: 1rem;
+  color: white;
+}
 
 body {
-  margin-top: 40px;
   font-size: 14px;
-  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 #wrap {
@@ -11,7 +18,6 @@ body {
 }
 
 #external-events {
-  float: left;
   width: 150px;
   padding: 0 10px;
   border: 1px solid #ccc;
@@ -42,6 +48,5 @@ body {
 }
 
 #calendar {
-  float: right;
   width: 900px;
 }
