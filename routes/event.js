@@ -16,7 +16,6 @@ module.exports = (db) => {
     });
   });
 
-
   const addCounts = (arr) => {
     let output = [];
     arr.forEach(date =>{
@@ -35,25 +34,22 @@ module.exports = (db) => {
     let creator_id = await creatorId(event_id, db);
 
     if(user_id === creator_id && vote == 0){
-      console.log('A')
         user_id = undefined
         getStartEnd(creator_id, db)
         .then(result => {
           let newDates = addCounts(result);
           console.log(newDates)
-          let templateVars = {dates: newDates, user_id, yes_count: '0', no_count: '0' }
+          let templateVars = {dates: newDates, user_id, yes_count: '0', no_count: '0', creator_id }
           return res.render('pollResult', templateVars);
         });
     } else if (user_id === creator_id) {
-      console.log('B')
         user_id = undefined
         getVoteCount(creator_id, db)
         .then( results => {
-          let templateVars = {dates: results, user_id }
+          let templateVars = {dates: results, user_id, creator_id}
           return res.render('pollResult', templateVars);
         })
     } else {
-      console.log('C')
       getVoteCount(user_id, db)
       .then( results => {
         let templateVars = {dates: results, user_id }
@@ -138,13 +134,17 @@ module.exports = (db) => {
     res.redirect(`/event/${user_id}/pollResult`);
   });
 
+  router.post('/:id/close', (req, res) => {
 
-  router.get('/:creatorId/result', (req, res) => {
-    let eventId = req.params.creatorId
-    pickDate(eventId, db)
-    .then(res => console.log(res));
-    // .then(response => console.log(response))
   });
+
+
+  // router.get('/:creatorId/result', (req, res) => {
+  //   let eventId = req.params.creatorId
+  //   pickDate(eventId, db)
+  //   .then(res => console.log(res));
+  //   // .then(response => console.log(response))
+  // });
 
   // Catch All Route
 
