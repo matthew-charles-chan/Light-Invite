@@ -32095,28 +32095,22 @@ $(() =>{
   });
   /* initialize the calendar
   -----------------------------------------------------------------*/
-  // const getTime = () => {
 
-  //   let duration = $('#calendar').data().duration.toString() || '60' ;
-  //   let time = '';
-  //   console.log('duration', duration, typeof(duration))
-
-  //   if(duration.length < 2){
-  //     time += `00:${duration}:00`
-  //     console.log(time);
-  //   }
-  //   else if(duration.length >= 3 && duration.length < 4) {
-  //     time += `0${duration[0]}:${duration[1]}${duration[2]}:00`
-  //     console.log(time);
-  //   }
-  //   else if (duration.length >= 4) {
-  //     time += `${duration[0]}${duration[1]}:${duration[2]}${duration[3]}:00`
-  //   }
-  // }
+  // let duration = $('#calendar').data().duration.toString() || '60' ;
+  let id = $('#calendar').data().id;
+  // let time = `00:${duration}:00`;
 
   let duration = $('#calendar').data().duration.toString() || '60' ;
-  let id = $('#calendar').data().id;
-  let time = `00:${duration}:00`;
+  let time = '';
+
+  if(duration.length <= 2){
+    time += `00:${duration}:00`
+    console.log(time);
+  }
+  else {
+    time += `0${duration[0]}:${duration[1]}${duration[2]}:00`
+    console.log(time);
+  }
 
   let calendarEl = document.getElementById('calendar');
   let calendar = new _fullcalendar_core__WEBPACK_IMPORTED_MODULE_5__["Calendar"](calendarEl, {
@@ -32151,6 +32145,20 @@ $(() =>{
     $.post('/event/date', {date: dateStr, id: id})
     .done(res => console.log(res))
     .fail(err => console.log(err));
+  }
+  const getTime = () => {
+
+    let duration = $('#calendar').data().duration.toString() || '60' ;
+    let time = '';
+
+    if(duration.length < 2){
+      time += `00:${duration}:00`
+      console.log(time);
+    }
+    else {
+      time += `0${duration[0]}:${duration[1]}${duration[2]}:00`
+      console.log(time);
+    }
   }
 });
 
