@@ -1,7 +1,7 @@
 const express = require('express');
 const router  = express.Router();
-const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount, creatorId, getEventIdWithUserId, checkIfVoted} = require('../lib/queries.js');
-const { sendMail } = require('../nodemailer/mailFunctions')
+const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount, creatorId, getEventIdWithUserId, checkIfVoted, getUserInfoWithEventId} = require('../lib/queries.js');
+const { sendMail, sendResultEmail } = require('../nodemailer/mailFunctions')
 
 module.exports = (db) => {
 
@@ -136,11 +136,20 @@ module.exports = (db) => {
 
   router.post('/:id/close', (req, res) => {
     let user_id = req.params.id
+    getEventIdWithUserId(user_id, db)
+    .then(res => getUserInfoWithEventId(res, db))
+    .then(result => {
+      result.forEach(user => {
+        name = user.name;
+        email = user.email;
+        id = user.id;
+        sendResultEmail(email, name, id)
+      })
+    })
     pickDate(user_id, db)
     .then(result => {
       res.render('result', { result })
     });
-
   });
 
 

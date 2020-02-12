@@ -98,15 +98,23 @@
 -- JOIN users on user_id = users.id
 -- where event_id =  'a6e2fce2-abae-4e63-9a29-5ca2c78a9ffd';
 
-SELECT date_id,
-      to_char(start_time, 'Mon DD YYYY  HH24:MI') as start_time,
-      to_char(start_time + (select duration from events where events.id = dates.event_id) * Interval '1 minute', 'Mon DD YYYY  HH24:MI') as end_time,
-      sum(case when isAvailable = true then 1 else 0 end) as yes_count,
-      sum(case when isAvailable = false then 1 else 0 end) as no_count,
-      title,
-      events.description
-      from votes
-      JOIN dates on date_id = dates.id
-      JOIN events on events.id = event_id
-      where dates.id = 14
-      GROUP BY date_id, dates.id, title, events.description;
+-- SELECT date_id,
+--       to_char(start_time, 'Mon DD YYYY  HH24:MI') as start_time,
+--       to_char(start_time + (select duration from events where events.id = dates.event_id) * Interval '1 minute', 'Mon DD YYYY  HH24:MI') as end_time,
+--       sum(case when isAvailable = true then 1 else 0 end) as yes_count,
+--       sum(case when isAvailable = false then 1 else 0 end) as no_count,
+--       title,
+--       events.description
+--       from votes
+--       JOIN dates on date_id = dates.id
+--       JOIN events on events.id = event_id
+--       where dates.id = 14
+--       GROUP BY date_id, dates.id, title, events.description;
+
+
+select event_id from users where id = 9551c619-c666-4b91-ba4d-e621dbeace89
+
+select name, email, (SELECT id from users where event_id = 'a6e2fce2-abae-4e63-9a29-5ca2c78a9ffd' and isCreator = true)
+FROM users
+where event_id = 'a6e2fce2-abae-4e63-9a29-5ca2c78a9ffd'
+;
