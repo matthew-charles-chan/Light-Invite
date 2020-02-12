@@ -135,7 +135,11 @@ module.exports = (db) => {
   });
 
   router.post('/:id/close', (req, res) => {
-
+    let user_id = req.params.id
+    pickDate(user_id, db)
+    .then(result => {
+      res.render('result', { result })
+    });
   });
 
 

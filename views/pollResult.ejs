@@ -48,7 +48,8 @@
           <li> YES : <%= yes_count%> NO: <%= no_count%> <%= start_time %> UNTIL <%= end_time %> </li>
           <% }); %>
       </ul>
-      <a href="/event/<% creator_id %>/close"><button>Close</button></a>
+      <form action="/event/<%= creator_id %>/close" method="POST"><button>Close</button></form>
+      <!-- <a href="/event/<%= creator_id %>/close"><button>Close</button></a> -->
       <a href="/event/<%= creator_id %>/pollResult"><button>Reload</button></a>
     <% } %>
 

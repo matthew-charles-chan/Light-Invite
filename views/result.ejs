@@ -20,14 +20,21 @@
 </head>
 <body>
   <nav>
-    <h3>Schoodle</h3>
+    <a href="/event" method="POST"><h3>Schoodle</h3></a>
     <p>Organize Your Event In A Few Simple Clicks</p>
   </nav>
   <header>
-
+    <h1>Event</h1>
   </header>
   <main>
-
+    <div>
+        <% let { start_time, end_time, yes_count} = result; %>
+        <p>
+          Title
+          Description
+          Votes: <%= yes_count%> For <%= start_time %> UNTIL <%= end_time %>
+        </p>
+    </div>
 
   </main>
 
