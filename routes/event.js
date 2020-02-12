@@ -146,6 +146,11 @@ module.exports = (db) => {
         sendResultEmail(email, name, id)
       })
     })
+    res.redirect(`/event/${user_id}/close`);
+  });
+
+  router.get('/:id/close', (req,res) =>{
+    let user_id = req.params.id;
     pickDate(user_id, db)
     .then(result => {
       res.render('result', { result })
@@ -153,12 +158,7 @@ module.exports = (db) => {
   });
 
 
-  // router.get('/:creatorId/result', (req, res) => {
-  //   let eventId = req.params.creatorId
-  //   pickDate(eventId, db)
-  //   .then(res => console.log(res));
-  //   // .then(response => console.log(response))
-  // });
+
 
   // Catch All Route
 
