@@ -30,18 +30,24 @@
   </header>
   <main>
     <div class="pollDisplay">
-        <ul>
-            <% dates.forEach(date => { %>
-            <% let { start_time, end_time, yes_count, no_count } = date; %>
-            <li> YES : <%= yes_count%> NO: <%= no_count%> <%= start_time %> UNTIL <%= end_time %> </li>
-            <% }); %>
-        </ul>
 
     </div>
 
     <% if(user_id) { %>
+      <ul>
+          <% dates.forEach(date => { %>
+          <% let { start_time, end_time, yes_count, no_count } = date; %>
+          <li> YES : <%= yes_count%> NO: <%= no_count%> <%= start_time %> UNTIL <%= end_time %> </li>
+          <% }); %>
+      </ul>
       <p>Update Availabilty<a href="/event/<%= user_id %>/poll"> Here</a></p>
     <% } else { %>
+      <ul>
+          <% dates.forEach(date => { %>
+          <% let { start_time, end_time } = date; %>
+          <li> <%= start_time %> UNTIL <%= end_time %> </li>
+          <% }); %>
+      </ul>
       <button>Close</button>
     <% } %>
 

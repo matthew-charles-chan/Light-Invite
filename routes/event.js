@@ -25,9 +25,15 @@ module.exports = (db) => {
     .then(result => {
       if(user_id === creator_id){
         user_id = undefined;
+        getStartEnd(creator_id, db)
+        .then(result => {
+          let templateVars = {dates: result, user_id }
+          return res.render('pollResult', templateVars);
+        });
+      } else {
+        let templateVars = {dates: result, user_id }
+        return res.render('pollResult', templateVars);
       }
-      let templateVars = {dates: result, user_id }
-      return res.render('pollResult', templateVars);
     });
 
   });
@@ -85,7 +91,7 @@ module.exports = (db) => {
       });
     });
     creatorId(event_id, db)
-    .then(result => res.redirect(`/event/${result.rows[0].id}/pollResult`));
+    .then(result => res.redirect(`/event/${result}/pollResult`));
   });
 
   router.post('/:id/poll', (req, res) => {

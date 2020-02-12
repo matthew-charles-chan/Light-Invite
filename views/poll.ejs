@@ -24,17 +24,17 @@
     <p>Organize Your Event In A Few Simple Clicks</p>
   </nav>
   <header>
+    <main class="container text-center">
     <h1>
       Select Preferred Availability
     </h1>
   </header>
-  <main>
     <form action="/event/<%= user_id %>/poll" METHOD='POST'>
       <div id='display-poll'></div>
       <ul>
           <% dates.forEach(date => { %>
           <% let { id, start_time, end_time } = date; %>
-          <li> <input type="radio" name='<%= id %>' value = 1> YES <input type="radio" name='<%= id %>' value = 0> NO
+          <li> <input type="radio" name='<%= id %>' value = 1 required> YES <input type="radio" name='<%= id %>' value = 0 required> NO
             <%= start_time %> UNTIL <%= end_time %> </li>
           <% }); %>
       </ul>
