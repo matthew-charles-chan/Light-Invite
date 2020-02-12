@@ -79,7 +79,21 @@
 
 
 
- SELECT events.id
-  FROM events
-  JOIN users on events.id = users.event_id
-  WHERE users.id = '5a5dd1d0-64d7-4670-9626-e04aef5baece';
+--  SELECT events.id
+--   FROM events
+--   JOIN users on events.id = users.event_id
+--   WHERE users.id = '5a5dd1d0-64d7-4670-9626-e04aef5baece';
+
+-- SELECT a.id as date_id, a.event_id,
+--   to_char(a.start_time, 'Mon DD YYYY  HH24:MI') as start_time,
+--   to_char(a.start_time + (select duration from events where events.id = a.event_id) * Interval '1 minute', 'Mon DD YYYY  HH24:MI') as end_time,
+--   a.start_time + (select duration from events where events.id = a.event_id) * Interval '1 minute'
+--   FROM dates a
+--   JOIN users on a.event_id = users.event_id
+--   WHERE users.id = '5a5dd1d0-64d7-4670-9626-e04aef5baece';
+
+
+SELECT count(*)
+from votes
+JOIN users on user_id = users.id
+where event_id =  'a6e2fce2-abae-4e63-9a29-5ca2c78a9ffd';

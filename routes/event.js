@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount, creatorId, getEventIdWithUserId} = require('../lib/queries.js');
+const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount, creatorId, getEventIdWithUserId, checkIfVoted} = require('../lib/queries.js');
 const { sendMail } = require('../nodemailer/mailFunctions')
 
 module.exports = (db) => {
@@ -16,27 +16,52 @@ module.exports = (db) => {
     });
   });
 
+
+  const addCounts = (arr) => {
+    let output = [];
+    arr.forEach(date =>{
+      date['yes_count'] = '0';
+      date['no_count'] = '0';
+      output.push(date)
+    });
+    console.log(output);
+    return output;
+  }
+
   router.get('/:id/pollResult', async (req, res) => {
     let user_id = req.params.id;
     let event_id = await getEventIdWithUserId(user_id, db);
+    let vote = await checkIfVoted(event_id, db);
     let creator_id = await creatorId(event_id, db);
 
-    getVoteCount(user_id, db)
-    .then(result => {
-      if(user_id === creator_id){
-        user_id = undefined;
+    if(user_id === creator_id && vote == 0){
+      console.log('A')
+        user_id = undefined
         getStartEnd(creator_id, db)
         .then(result => {
-          let templateVars = {dates: result, user_id }
+          let newDates = addCounts(result);
+          console.log(newDates)
+          let templateVars = {dates: newDates, user_id, yes_count: '0', no_count: '0' }
           return res.render('pollResult', templateVars);
         });
-      } else {
-        let templateVars = {dates: result, user_id }
+    } else if (user_id === creator_id) {
+      console.log('B')
+        user_id = undefined
+        getVoteCount(creator_id, db)
+        .then( results => {
+          let templateVars = {dates: results, user_id }
+          return res.render('pollResult', templateVars);
+        })
+    } else {
+      console.log('C')
+      getVoteCount(user_id, db)
+      .then( results => {
+        let templateVars = {dates: results, user_id }
         return res.render('pollResult', templateVars);
-      }
-    });
-
+      })
+    }
   });
+
 
   router.get('/:id/dates', (req, res) =>{
     // get event
