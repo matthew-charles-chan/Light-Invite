@@ -56,13 +56,16 @@
       <button type="submit" class="btn btn-primary btn-xl">Submit</button>
     </form>
       <% } else { %>
-        <label for="userName">
-          Name: <%= user_name %>
-        </label>
-        <br>
-        <label for="userEmail">
-          Email: <%= email%>
-        </label>
+        <table>
+          <tr>
+            <th>Name:</th>
+            <td><%= user_name %></td>
+          </tr>
+          <tr>
+            <th>Email:</th>
+            <td><%= email%></td>
+          </tr>
+        </table>
         <button type="button" class="btn btn-primary btn-xl" id="updateInfo">Update</button>
       <% } %>
       <section id="updateSection">
