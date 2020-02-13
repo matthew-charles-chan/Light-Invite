@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const { addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount, creatorId, getEventIdWithUserId, checkIfVoted, getUsersInfoWithEventId , getUserByUserId, updateEmailByUserId} = require('../lib/queries.js');
+const { forceStartEndWithDateId, addEvent, addDate, addUserGuest, getIdFromEmail, getStartEnd, pickDate, updateNameByUserId, makeAvailable, notAvailable, DeleteVote, getVoteCount, creatorId, getEventIdWithUserId, checkIfVoted, getUsersInfoWithEventId , getUserByUserId, updateEmailByUserId, forcePickDate} = require('../lib/queries.js');
 const { sendMail, sendResultEmail } = require('../nodemailer/mailFunctions')
 
 module.exports = (db) => {
@@ -152,26 +152,61 @@ module.exports = (db) => {
   router.post('/:id/close', async(req, res) => {
     let user_id = req.params.id
     let event_id = await getEventIdWithUserId(user_id, db)
-    console.log(event_id)
-    let date = await pickDate(user_id, db)
-    console.log(date);
-    getUsersInfoWithEventId(event_id, db)
-    .then(result => {
-      result.forEach(user => {
-        name = user.name;
-        email = user.email;
-        id = user.id;
-        sendResultEmail(email, name, date.title, date.start_time, date.description, id)
-      })
-    })
+    // console.log(event_id)
+    let date;
+    let vote = await checkIfVoted(event_id, db);
+    if (vote > 0 ) {
+      date = await pickDate(user_id, db)
+    } else {
+      date = await forcePickDate(user_id, db)
+    }
+    let users = await getUsersInfoWithEventId(event_id, db)
+    users.forEach(user => {
+          name = user.name;
+          email = user.email;
+          id = user.id;
+          sendResultEmail(email, name, date.title, date.start_time, date.description, id)
+        })
     res.redirect(`/event/${user_id}/close`);
-  });
+  })
+
+
+
+  //   if (vote > 0) {
+  //     let
+
+  //     .then(result => {
+  //       result.forEach
+  //   } else {
+  //     let date = await forcePickDate(user_id, db)
+  //     console.log(date);
+  //     getUsersInfoWithEventId(event_id, db)
+  //     .then(result => {
+  //       result.forEach(user => {
+  //         name = user.name;
+  //         email = user.email;
+  //         id = user.id;
+  //         sendResultEmail(email, name, date.title, date.start_time, date.description, id)
+  //       })
+  //     })
+  //     res.redirect(`/event/${user_id}/close`);
+  //   }
+  // });
 
   router.get('/:id/close', async (req,res) =>{
+
     let user_id = req.params.id;
-    let result = await pickDate(user_id, db);
     const eventId = await getEventIdWithUserId(user_id, db);
+    const vote = await checkIfVoted(eventId, db);
     const users = await getUsersInfoWithEventId(eventId, db);
+
+    let result;
+    if (vote > 0) {
+      result = await pickDate(user_id, db);
+    } else {
+      result = await forcePickDate(user_id, db);
+    }
+
     result.users = [];
     users.forEach(user => {
       result.users.push(user.name)
