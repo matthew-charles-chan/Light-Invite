@@ -49,11 +49,13 @@
             <% }); %>
         </ul>
         <% if(!user_name) { %>
+          <br>
           <input type="text" name='name' placeholder="Enter Name" required>
         <button type="submit" class="btn btn-primary btn-xl">Submit</button>
         <br>
         </form>
       <% } else { %>
+        <br>
         <table>
           <tr>
             <th>Name:</th>
@@ -64,6 +66,7 @@
             <td><%= email%></td>
           </tr>
         </table>
+        <br>
         <button type="button" class="btn btn-primary btn-xl" id="updateInfo">Update</button>
         <button type="submit" class="btn btn-primary btn-xl">Submit</button>
         </form>
@@ -73,7 +76,7 @@
           <input type="text" name='name' placeholder="Name" required>
           <input type="email" name='email' placeholder="Email" required>
           <br>
-        <button type="sumbit" id='update' class="btn btn-primary btn-xl" formmethod="POST" formaction="/event/<%= user_id %>/updateInfo">UPDATE</button>
+        <button type="sumbit" id='update' class="btn btn-primary btn-xl" formmethod="POST" formaction="/event/<%= user_id %>/updateInfo">Update</button>
         </form>
       </section>
     </div>
