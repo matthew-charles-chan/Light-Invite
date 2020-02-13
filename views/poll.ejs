@@ -25,28 +25,39 @@
     <h3>Light Schedule</h3>
     <p>Organize Your Event In A Few Simple Clicks</p>
   </nav>
-  <main class="content-section bg-light text-center">
-    <header>
-      <h1>
-        Select Preferred Availability
-      </h1>
-    </header>
-    <form action="/event/<%= user_id %>/poll" METHOD='POST'>
+  <main class="text-center">
+    <div id='availabilty'>
+        <header>
+            <h1>
+              Select Preferred Availability
+            </h1>
+          </header>
+      <form action="/event/<%= user_id %>/poll" METHOD='POST'>
       <div id='display-poll'></div>
       <ul>
           <% dates.forEach(date => { %>
           <% let { id, start_time, end_time } = date; %>
-          <li> <input type="radio" name='<%= id %>' value = 1 > YES <input type="radio" name='<%= id %>' value = 0 > NO
-            <%= start_time %> UNTIL <%= end_time %> </li>
+          <li>
+            <div class="checked">
+              <input type="radio" name='<%= id %>' value = 1 >
+              <label for="yes">YES</label>
+              <input type="radio" name='<%= id %>' value = 0 >
+              <label for="no">NO</label>
+            </div>
+            <%= start_time %> UNTIL <%= end_time %>
+          </li>
           <% }); %>
       </ul>
-      <button type="submit">Submit</button>
+      <button type="submit" class="btn btn-xl btn-dark">Submit</button>
+      <br>
+      <br>
       <% if(!user_name) { %>
       <label for="name">
         Enter Name:
         <input type="text" name='name'>
       </label>
-      <button type="submit">Submit</button>
+      <br>
+      <button type="submit" class="btn btn-xl btn-dark">Submit</button>
     </form>
       <% } else { %>
         <table>
@@ -74,6 +85,7 @@
           <button type="sumbit" id='update' formmethod="POST" formaction="/event/<%= user_id %>/updateInfo">UPDATE</button>
         </form>
       </section>
+    </div>
   </main>
 </body>
   <script src="/bootstrap-style/vendor/jquery/jquery.min.js"></script>

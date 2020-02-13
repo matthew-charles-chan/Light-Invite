@@ -11,13 +11,50 @@ nav {
   display: flex;
   justify-content: space-between;
 }
+#availabilty {
+  background-color: white;
+  display: inline-block;
+  padding: 10rem;
+  box-shadow: 0 0 5px 5px lightgray;
+}
+
+main{
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+body, main{
+  background-image: $background-image !important;
+}
+
+.checked {
+  display: inline;
+}
+
+h1{
+  margin-bottom: 2rem;
+}
+
+
+label{
+  padding-right: 2rem;
+}
+
+button{
+  background-color: $light-blue !important;
+  border-color: $light-blue !important;
+}
 
 ul {
   list-style-type: none;
 }
 
 input[type='radio']{
-  background-color: orange;
+  padding: 1rem;
+}
+
+input[type='radio']:checked:after{
+  background-color: $light-blue;
 }
 
 
