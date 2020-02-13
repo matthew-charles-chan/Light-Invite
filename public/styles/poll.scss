@@ -16,6 +16,11 @@ h1{
   border-bottom: 5px dotted orange;
   display: inline-block;
   padding: 1rem;
+
+  #extraPadding{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 h3{
@@ -34,6 +39,7 @@ nav h2{
 
 h5{
   font-weight: 500;
+  margin-top: 2rem;
 }
 
 nav p {
@@ -54,7 +60,6 @@ body, main{
 }
 
 h1{
-  margin-bottom: 2rem;
   font-family: $font-stack;
 }
 
@@ -100,3 +105,24 @@ input[type='text'], input[type='email'] {
   border-left-style: hidden;
   border-bottom-style: ridge;
 }
+
+#grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#fGrid{
+  grid-column: 2;
+  button{
+    width: 136px;
+  }
+}
+
+#aGrid{
+  grid-column: 1;
+}
+
+ul{
+  display: inline;
+}
+

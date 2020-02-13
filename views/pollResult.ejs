@@ -25,15 +25,13 @@
   </nav>
   <main class='text-center'>
     <div id='result'>
-    <header>
-        <h1>
-          Event Results
-        </h1>
-        </header>
-    <div class="pollDisplay">
-    </div>
+      <header>
+          <h1 id='extraPadding'>
+            Event Results
+          </h1>
+      </header>
 
-    <% if(user_id) { %>
+     <% if(user_id) { %>
       <ul>
           <% dates.forEach(date => { %>
           <% let { start_time, end_time, yes_count, no_count } = date; %>
@@ -45,17 +43,23 @@
           <% }); %>
       </ul>
       <h5>Update Availabilty<a href="/event/<%= user_id %>/poll"> Here</a></h5>
-    <% } else { %>
+      <% } else { %>
       <ul>
           <% dates.forEach(date => { %>
           <% let { start_time, end_time, yes_count, no_count } = date; %>
-          <li> YES : <%= yes_count%> NO: <%= no_count%> <%= start_time %> UNTIL <%= end_time %> </li>
+          <li>
+            YES : <%= yes_count%> NO: <%= no_count%>
+            <label for="time">
+              <%= start_time %> Until <%= end_time %>
+            </label>
+            </li>
           <% }); %>
       </ul>
-      <form action="/event/<%= creator_id %>/close" method="POST"><button class="btn btn-primary btn-xl">Close</button></form>
-      <!-- <a href="/event/<%= creator_id %>/close"><button>Close</button></a> -->
-      <a href="/event/<%= creator_id %>/pollResult"><button class="btn btn-primary btn-xl">Reload</button></a>
-    <% } %>
+      <div id="grid">
+      <a href="/event/<%= creator_id %>/pollResult" id='aGrid'><button class="btn btn-primary btn-xl">Refresh</button></a>
+      <form id='fGrid' action="/event/<%= creator_id %>/close" method="POST"><button class="btn btn-primary btn-xl">Close</button></form>
+      <% } %>
+      </div>
     </div>
   </main>
 

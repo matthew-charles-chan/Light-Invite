@@ -16,6 +16,10 @@ h1 {
   display: inline-block;
   padding: 1rem;
 }
+h1 #extraPadding {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
 
 h3 {
   font-family: "Poppins", san-serif;
@@ -34,6 +38,7 @@ nav h2 {
 
 h5 {
   font-weight: 500;
+  margin-top: 2rem;
 }
 
 nav p {
@@ -54,7 +59,6 @@ body, main {
 }
 
 h1 {
-  margin-bottom: 2rem;
   font-family: "Poppins", san-serif;
 }
 
@@ -97,6 +101,26 @@ input[type=text], input[type=email] {
   border-right-style: hidden;
   border-left-style: hidden;
   border-bottom-style: ridge;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#fGrid {
+  grid-column: 2;
+}
+#fGrid button {
+  width: 136px;
+}
+
+#aGrid {
+  grid-column: 1;
+}
+
+ul {
+  display: inline;
 }
 
 /*# sourceMappingURL=poll.css.map */
