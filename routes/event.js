@@ -11,10 +11,6 @@ module.exports = (db) => {
     updateNameByUserId(req.body.name, user_id, db)
     updateEmailByUserId(req.body.email, user_id, db)
     res.redirect(`/event/${user_id}/poll`)
-    console.log(user_id)
-    console.log(req.body)
-
-
 
   })
 
@@ -40,17 +36,20 @@ module.exports = (db) => {
   }
 
   router.get('/:id/pollResult', async (req, res) => {
+    console.log('first');
     let user_id = req.params.id;
     let event_id = await getEventIdWithUserId(user_id, db);
+    console.log(event_id);
     let vote = await checkIfVoted(event_id, db);
+    console.log('err2')
     let creator_id = await creatorId(event_id, db);
+    console.log('err3')
 
     if(user_id === creator_id && vote == 0){
         user_id = undefined
         getStartEnd(creator_id, db)
         .then(result => {
           let newDates = addCounts(result);
-          console.log(newDates)
           let templateVars = {dates: newDates, user_id, yes_count: '0', no_count: '0', creator_id }
           return res.render('pollResult', templateVars);
         });
@@ -62,8 +61,10 @@ module.exports = (db) => {
           return res.render('pollResult', templateVars);
         })
     } else {
+      console.log('fdfs');
       getVoteCount(user_id, db)
       .then( results => {
+        console.log(results);
         let templateVars = {dates: results, user_id }
         return res.render('pollResult', templateVars);
       })
@@ -134,9 +135,9 @@ module.exports = (db) => {
     if (!user.name) {
       let { name } = req.body;
       updateNameByUserId(name, user_id, db)
-      .then(result => console.log(result));
+      .then(result => result)
+      .catch(err => console.log(err));
     }
-
     for(const date in dates){
       DeleteVote(date, user_id, db);
       if(dates[date] == 1){
@@ -146,7 +147,7 @@ module.exports = (db) => {
         notAvailable(date, user_id, db);
       }
     }
-    res.redirect(`/event/${user_id}/pollResult`);
+    return res.redirect(`/event/${user_id}/pollResult`);
   });
 
   router.post('/:id/close', async(req, res) => {
@@ -170,28 +171,6 @@ module.exports = (db) => {
     res.redirect(`/event/${user_id}/close`);
   })
 
-
-
-  //   if (vote > 0) {
-  //     let
-
-  //     .then(result => {
-  //       result.forEach
-  //   } else {
-  //     let date = await forcePickDate(user_id, db)
-  //     console.log(date);
-  //     getUsersInfoWithEventId(event_id, db)
-  //     .then(result => {
-  //       result.forEach(user => {
-  //         name = user.name;
-  //         email = user.email;
-  //         id = user.id;
-  //         sendResultEmail(email, name, date.title, date.start_time, date.description, id)
-  //       })
-  //     })
-  //     res.redirect(`/event/${user_id}/close`);
-  //   }
-  // });
 
   router.get('/:id/close', async (req,res) =>{
 
