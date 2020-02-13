@@ -33,28 +33,26 @@
             </h1>
           </header>
       <form action="/event/<%= user_id %>/poll" METHOD='POST'>
-      <div id='display-poll'></div>
-      <ul>
-          <% dates.forEach(date => { %>
-          <% let { id, start_time, end_time } = date; %>
-          <li>
-            <div class="checked">
-              <input type="radio" name='<%= id %>' value = 1 required>
-              <label for="yes">YES</label>
-              <input type="radio" name='<%= id %>' value = 0 required>
-              <label for="no">NO</label>
-            </div>
-            <%= start_time %> UNTIL <%= end_time %>
-          </li>
-          <% }); %>
-      </ul>
-      <br>
-      <br>
-      <% if(!user_name) { %>
-        <input type="text" name='name' placeholder="Enter Name" required>
-      <br>
-      <button type="submit" class="btn btn-primary btn-xl">Submit</button>
-    </form>
+        <div id='display-poll'></div>
+        <ul>
+            <% dates.forEach(date => { %>
+            <% let { id, start_time, end_time } = date; %>
+            <li>
+              <div class="checked">
+                <input type="radio" name='<%= id %>' value = 1 required>
+                <label for="yes">YES</label>
+                <input type="radio" name='<%= id %>' value = 0 required>
+                <label for="no">NO</label>
+              </div>
+              <%= start_time %> Until <%= end_time %>
+            </li>
+            <% }); %>
+        </ul>
+        <% if(!user_name) { %>
+          <input type="text" name='name' placeholder="Enter Name" required>
+        <button type="submit" class="btn btn-primary btn-xl">Submit</button>
+        <br>
+        </form>
       <% } else { %>
         <table>
           <tr>
@@ -67,13 +65,15 @@
           </tr>
         </table>
         <button type="button" class="btn btn-primary btn-xl" id="updateInfo">Update</button>
+        <button type="submit" class="btn btn-primary btn-xl">Submit</button>
+        </form>
       <% } %>
       <section id="updateSection">
         <form action='/event/<%= user_id %>/updateInfo' method='POST'>
-            <input type="text" name='name' placeholder="Name" required>
-            <input type="email" name='email' placeholder="Email" required>
+          <input type="text" name='name' placeholder="Name" required>
+          <input type="email" name='email' placeholder="Email" required>
           <br>
-          <button type="sumbit" id='update' class="btn btn-primary btn-xl" formmethod="POST" formaction="/event/<%= user_id %>/updateInfo">UPDATE</button>
+        <button type="sumbit" id='update' class="btn btn-primary btn-xl" formmethod="POST" formaction="/event/<%= user_id %>/updateInfo">UPDATE</button>
         </form>
       </section>
     </div>

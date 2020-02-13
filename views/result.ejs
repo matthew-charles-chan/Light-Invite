@@ -23,27 +23,28 @@
     <h3>Light Schedule</h3></a>
     <p>Organize Your Event In A Few Simple Clicks</p>
   </nav>
-  <header>
-    <h1>Event</h1>
-  </header>
-  <main>
-    <div>
-        <% let { start_time, end_time, yes_count, title, description, users} = result; %>
-        <p>
-          <%= title %>
-          <%= description %>
-          Votes: <%= yes_count%> For <%= start_time %> UNTIL <%= end_time %>
-        </p>
-        <p>This event will be attended by:</p>
-        <ul>
-          <% result.users.forEach(user => { %>
-          <li>
-            <%= user %>
-          </li>
-          <% }) %>
-          </ul>
+  <main class='text-center'>
+    <div id='display'>
+    <header>
+      <h1>Event</h1>
+    </header>
+      <div>
+          <% let { start_time, end_time, yes_count, title, description, users} = result; %>
+          <p>
+            <%= title %>
+            <%= description %>
+            Votes: <%= yes_count%> For <%= start_time %> UNTIL <%= end_time %>
+          </p>
+          <p>This event will be attended by:</p>
+          <ul>
+            <% result.users.forEach(user => { %>
+            <li>
+              <%= user %>
+            </li>
+            <% }) %>
+            </ul>
+      </div>
     </div>
-
   </main>
 
 </body>
