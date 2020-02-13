@@ -52,24 +52,18 @@
     <div style='clear:both'></div>
 
   </div>
-  <div class='users_email'>
-      <h2>Enter Recipient Emails</h2>
+  <div id='users_email'>
+    <div id='email_form'>
+        <h2>Enter Recipient Emails</h2>
         <form action="/event/users" method="POST">
-            <label for="email_1">
-              Email:
-              <input type="text" name='email_1' required>
-            </label>
-            <label for="email_2">
-              Email:
-                <input type="text" name='email_2' required>
-            </label>
-            <label for="email_3">
-              Email:
-                <input type="text" name='email_3' required>
-            </label>
-            <button type='submit'>Submit</button>
-        </form>
-    </div>
+          <input type="text" name='email_1' required placeholder="Email">
+          <input type="text" name='email_2' required placeholder="Email">
+          <input type="text" name='email_3' required placeholder="Email">
+          <br>
+          <button type='submit' class="btn btn-xl btn-dark">Submit</button>
+      </form>
+      </div>
+  </div>
 </body>
    <!-- Bootstrap core JavaScript -->
    <script src="/bootstrap-style/vendor/jquery/jquery.min.js"></script>

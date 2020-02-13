@@ -2,8 +2,13 @@
 nav {
   background-image: linear-gradient(45deg, #FEE140 0%, #FA709A 100%);
   display: block;
-  padding: 1rem;
+  padding: 2rem;
   color: white;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
 }
 
 header {
@@ -15,21 +20,62 @@ body {
   font-size: 14px;
   font-family: "Poppins", san-serif;
   background-color: #f9f5f5;
+  background-image: url("../background/inspiration-geometry.png");
 }
 
 h2 {
   text-align: center;
-  color: #6c757de0;
-  background-color: #f9f5f5;
+  color: #2C3E50;
 }
 
-.users_email {
+header h2 {
+  background-color: white;
+  border-bottom: 5px dotted orange;
+  padding: 1.5rem;
+  padding-bottom: 0.5rem;
+  text-align: center;
+  margin-left: 41vw;
+  margin-right: 41vw;
+  display: inline-block;
+}
+
+#users_email {
   margin: 0 auto;
   background-color: #f9f5f5;
-  padding-top: 4rem;
+  padding-top: 2rem;
   padding-bottom: 7.5rem;
   text-align: center;
   background-image: url("../background/inspiration-geometry.png");
+}
+
+#email_form {
+  background-color: white;
+  display: inline-block;
+  padding: 5rem;
+  box-shadow: 0 0 5px 5px lightgray;
+  width: 1050px;
+}
+
+form {
+  background-color: white;
+}
+
+#email_form {
+  text-align: center;
+}
+#email_form h2 {
+  margin-bottom: 2rem;
+}
+#email_form input {
+  margin: auto;
+  margin-bottom: 1.5rem;
+  display: block;
+  width: 300px;
+  outline: none;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: ridge;
 }
 
 #wrap {
@@ -39,7 +85,7 @@ h2 {
   display: flex;
   background-color: white;
   box-shadow: 0 0 5px 5px lightgrey;
-  margin-bottom: 0.5rem;
+  margin-bottom: 4rem;
 }
 
 #external-events {
@@ -76,6 +122,10 @@ h2 {
 
 #calendar {
   width: 900px;
+}
+
+p {
+  margin-top: 0.5rem;
 }
 
 /*# sourceMappingURL=date.css.map */

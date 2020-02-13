@@ -1,11 +1,12 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
+@import 'base';
+
 nav {
-  background-image: linear-gradient(45deg, #FEE140 0%, #FA709A 100%);
+  background-image: $nav-image;
   display: block;
   padding: 2rem;
   color: white;
   position: sticky;
-  top: 0;
+  top:0;
   z-index: 2;
   display: flex;
   justify-content: space-between;
@@ -15,9 +16,10 @@ ul {
   list-style-type: none;
 }
 
-input[type=radio] {
+input[type='radio']{
   background-color: orange;
 }
+
 
 #updateSection {
   display: none;
@@ -25,6 +27,5 @@ input[type=radio] {
 
 #updateSection.visable {
   display: block;
-}
 
-/*# sourceMappingURL=poll.css.map */
+}

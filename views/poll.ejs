@@ -25,12 +25,12 @@
     <h3>Light Schedule</h3>
     <p>Organize Your Event In A Few Simple Clicks</p>
   </nav>
-  <header>
-  <main class="container text-center">
-    <h1>
-      Select Preferred Availability
-    </h1>
-  </header>
+  <main class="content-section bg-light text-center">
+    <header>
+      <h1>
+        Select Preferred Availability
+      </h1>
+    </header>
     <form action="/event/<%= user_id %>/poll" METHOD='POST'>
       <div id='display-poll'></div>
       <ul>
@@ -74,6 +74,7 @@
           <button type="sumbit" id='update' formmethod="POST" formaction="/event/<%= user_id %>/updateInfo">UPDATE</button>
         </form>
       </section>
+  </main>
 </body>
   <script src="/bootstrap-style/vendor/jquery/jquery.min.js"></script>
   <script src="/scripts/poll.js"></script>

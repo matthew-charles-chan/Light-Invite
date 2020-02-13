@@ -22,20 +22,15 @@ $(() =>{
   /* initialize the calendar
   -----------------------------------------------------------------*/
 
-  // let duration = $('#calendar').data().duration.toString() || '60' ;
   let id = $('#calendar').data().id;
-  // let time = `00:${duration}:00`;
-
   let duration = $('#calendar').data().duration.toString() || '60' ;
   let time = '';
 
   if(duration.length <= 2){
     time += `00:${duration}:00`
-    console.log(time);
   }
   else {
     time += `0${duration[0]}:${duration[1]}${duration[2]}:00`
-    console.log(time);
   }
 
   let calendarEl = document.getElementById('calendar');
@@ -72,20 +67,7 @@ $(() =>{
     .done(res => console.log(res))
     .fail(err => console.log(err));
   }
-  const getTime = () => {
 
-    let duration = $('#calendar').data().duration.toString() || '60' ;
-    let time = '';
-
-    if(duration.length < 2){
-      time += `00:${duration}:00`
-      console.log(time);
-    }
-    else {
-      time += `0${duration[0]}:${duration[1]}${duration[2]}:00`
-      console.log(time);
-    }
-  }
 });
 
 
