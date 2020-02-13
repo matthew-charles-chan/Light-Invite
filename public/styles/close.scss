@@ -1,0 +1,156 @@
+$oo:#FEE140;
+$rr:#F44336;
+@import 'base';
+
+nav {
+  background-image: $nav-image;
+  display: block;
+  padding: 2rem;
+  color: white;
+  position: sticky;
+  top:0;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+}
+
+h4{
+  border-bottom: 3px dotted orange;
+  display: inline-block;
+  padding: 10px;
+}
+
+body, main{
+  background-image: $background-image !important;
+}
+
+@mixin transition($in) {
+	transition:$in;
+	-webkit-transition:$in;
+	-moz-transition:$in;
+	-o-transition:$in;
+	-ms-transition:$in;
+}
+@mixin transform($in) {
+	transform:$in;
+	-webkit-transform:$in;
+	-moz-transform:$in;
+	-o-transform:$in;
+	-ms-transform:$in;
+}
+@mixin transform-style($in) {
+	transform-style:$in;
+	-webkit-transform-style:$in;
+	-moz-transform-style:$in;
+	-o-transform-style:$in;
+	-ms-transform-style:$in;
+}
+@mixin perspective($in) {
+	perspective:$in;
+	-webkit-perspective:$in;
+	-moz-perspective:$in;
+	-o-perspective:$in;
+	-ms-perspective:$in;
+}
+@mixin perspective-origin($in) {
+	perspective-origin:$in;
+	-webkit-perspective-origin:$in;
+	-moz-perspective-origin:$in;
+	-o-perspective-origin:$in;
+	-ms-perspective-origin:$in;
+}
+@mixin transform-origin($in) {
+	transform-origin:$in;
+	-webkit-transform-origin:$in;
+	-moz-transform-origin:$in;
+	-o-transform-origin:$in;
+	-ms-transform-origin:$in;
+}
+
+
+
+
+main.container {
+  padding-top: 50px;
+	width:80%;
+	margin:30px auto;
+}
+
+#open-env {
+	display:none;
+}
+
+.env {
+	margin:200px auto 0;
+	background:$oo;
+	width:600px;
+	@include perspective(3000px);
+	@include perspective-origin(50% 0);
+	@include transform-style(preserve-3d);
+
+	.rest {
+		width:600px;
+		height:0;
+		margin:0;
+		border:200px solid $oo;
+		border-bottom:150px solid darken($oo,12%);
+		border-top:150px solid transparent;
+		margin-top:-300px;
+	}
+	.content {
+		width:550px;
+		margin:0;
+		padding: 10px 25px 0px 25px;
+    height:300px;
+    border: 2px solid $mid-gray;
+    border-bottom-width: 0px;;
+		background:#fff;
+		@include transition(all 0.5s ease);
+		text-align:center;
+		position:absolute;
+		z-index:-5;
+		margin-left:25px;
+		@include transform(translate(0,0));
+	}
+	.top {
+		display:block;
+		width:480px;
+		height:0;
+		border:200px solid transparent;
+		border-top-color:darken($oo,15%);
+		margin:0 auto;
+		@include transform(scale(1.25,1));
+		margin-bottom:-400px;
+		cursor:pointer;
+		@include transition(all 0.5s ease);
+		@include transform-origin(50% 0);
+    position:relative;
+  }
+
+  .attendees {
+    margin: 0;
+    padding: 0;
+  }
+  .list {
+    list-style-type: none;
+    width:200px;
+    margin-left: 115px;
+    text-align: left;
+  }
+
+	#open-env {
+		&:checked ~ label.top {
+			@include transform(rotateX(-180deg) scale(1.25,1));
+      z-index:-20;
+		}
+		&:checked ~ .content {
+			animation:out 0.5s ease forwards 1 0.5s;
+		}
+	}
+}
+
+@keyframes out {
+	100% {
+		@include transform(translate(0px,-150px));
+	}
+}

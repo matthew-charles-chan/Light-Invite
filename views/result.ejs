@@ -15,7 +15,7 @@
 
    <!-- Custom CSS -->
    <link href="/bootstrap-style/css/stylish-portfolio.css" rel="stylesheet">
-   <link rel="stylesheet" href="/styles/poll.css">
+   <link rel="stylesheet" href="/styles/close.css">
   <title>Document</title>
 </head>
 <body>
@@ -23,29 +23,37 @@
     <h3>Light Schedule</h3></a>
     <p>Organize Your Event In A Few Simple Clicks</p>
   </nav>
-  <main class='text-center'>
-    <div id='display'>
-    <header>
-      <h1>Event</h1>
-    </header>
-      <div>
+  <main class='container'>
+
+    <div class='env'>
+      <label for='open-env'>
+        <input type='checkbox' id='open-env' />
+        <label class='top' for='open-env'></label>
+        <div class='content'>
           <% let { start_time, end_time, yes_count, title, description, users} = result; %>
-          <p>
-            <%= title %>
-            <%= description %>
-            Votes: <%= yes_count%> For <%= start_time %> UNTIL <%= end_time %>
-          </p>
-          <p>This event will be attended by:</p>
-          <ul>
-            <% result.users.forEach(user => { %>
-            <li>
-              <%= user %>
-            </li>
-            <% }) %>
-            </ul>
-      </div>
+          <header>
+            <h4><%= title %></h4>
+            <p><%= description %></p>
+          </header>
+          <div id='display'>
+
+            <div>
+                <h5><%= start_time %> - <%= end_time %></h5>
+                <h6 class="attendess">This event will be attended by:</h6>
+                <ul class="list">
+                  <% result.users.forEach(user => { %>
+                  <li><%= user %></li>
+                  <% }) %>
+                  </ul>
+            </div>
+          </div>
+        </div>
+        <div class='rest'></div>
+      </label>
     </div>
+
   </main>
+
 
 </body>
    <!-- Bootstrap core JavaScript -->
