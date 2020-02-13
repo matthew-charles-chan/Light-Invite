@@ -11,11 +11,33 @@ nav {
   justify-content: space-between;
 }
 
-#availabilty {
+h1 {
+  border-bottom: 5px dotted orange;
+  display: inline-block;
+  padding: 1rem;
+}
+
+h3 {
+  font-family: "Poppins", san-serif;
+}
+
+nav h2 {
+  margin-top: 0.5rem;
+}
+
+#availabilty, #result {
   background-color: white;
   display: inline-block;
   padding: 10rem;
   box-shadow: 0 0 5px 5px lightgray;
+}
+
+h5 {
+  font-weight: 500;
+}
+
+nav p {
+  margin-top: 0.5rem;
 }
 
 main {
@@ -33,6 +55,7 @@ body, main {
 
 h1 {
   margin-bottom: 2rem;
+  font-family: "Poppins", san-serif;
 }
 
 label {
@@ -62,6 +85,18 @@ input[type=radio]:checked:after {
 
 #updateSection.visable {
   display: block;
+}
+
+input[type=text], input[type=email] {
+  margin: auto;
+  margin-bottom: 1.5rem;
+  display: block;
+  width: 300px;
+  outline: none;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: ridge;
 }
 
 /*# sourceMappingURL=poll.css.map */

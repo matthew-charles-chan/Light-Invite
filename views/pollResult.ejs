@@ -20,15 +20,16 @@
 </head>
 <body>
   <nav>
-    <h3>Schoodle</h3>
+    <h3>Light Schedule</h3>
     <p>Organize Your Event In A Few Simple Clicks</p>
   </nav>
-  <header>
-    <h1>
-      Event Results
-    </h1>
-  </header>
-  <main>
+  <main class='text-center'>
+    <div id='result'>
+    <header>
+        <h1>
+          Event Results
+        </h1>
+        </header>
     <div class="pollDisplay">
 
     </div>
@@ -37,10 +38,14 @@
       <ul>
           <% dates.forEach(date => { %>
           <% let { start_time, end_time, yes_count, no_count } = date; %>
-          <li> YES : <%= yes_count%> NO: <%= no_count%> <%= start_time %> UNTIL <%= end_time %> </li>
+          <li>
+            <label for="yes">YES : <%= yes_count%></label>
+            <label for="no">NO: <%= no_count%></label>
+            <%= start_time %> UNTIL <%= end_time %>
+          </li>
           <% }); %>
       </ul>
-      <p>Update Availabilty<a href="/event/<%= user_id %>/poll"> Here</a></p>
+      <h5>Update Availabilty<a href="/event/<%= user_id %>/poll"> Here</a></h5>
     <% } else { %>
       <ul>
           <% dates.forEach(date => { %>
@@ -48,11 +53,11 @@
           <li> YES : <%= yes_count%> NO: <%= no_count%> <%= start_time %> UNTIL <%= end_time %> </li>
           <% }); %>
       </ul>
-      <form action="/event/<%= creator_id %>/close" method="POST"><button>Close</button></form>
+      <form action="/event/<%= creator_id %>/close" method="POST"><button class="btn btn-primary btn-xl">Close</button></form>
       <!-- <a href="/event/<%= creator_id %>/close"><button>Close</button></a> -->
-      <a href="/event/<%= creator_id %>/pollResult"><button>Reload</button></a>
+      <a href="/event/<%= creator_id %>/pollResult"><button class="btn btn-primary btn-xl">Reload</button></a>
     <% } %>
-
+    </div>
   </main>
 
 </body>
