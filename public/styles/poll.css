@@ -15,8 +15,10 @@ h1 {
   border-bottom: 5px dotted orange;
   display: inline-block;
   padding: 1rem;
+  font-family: "Poppins", san-serif;
 }
-h1 #extraPadding {
+
+#extraPadding {
   padding-left: 2rem;
   padding-right: 2rem;
 }
@@ -56,10 +58,6 @@ body, main {
 
 .checked {
   display: inline;
-}
-
-h1 {
-  font-family: "Poppins", san-serif;
 }
 
 label {
@@ -106,6 +104,7 @@ input[type=text], input[type=email] {
 #grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-top: 2rem;
 }
 
 #fGrid {
@@ -121,6 +120,22 @@ input[type=text], input[type=email] {
 
 ul {
   display: inline;
+}
+
+#updateSection {
+  margin-top: 2rem;
+}
+
+#updateInfo {
+  margin-right: 2rem;
+}
+
+th {
+  padding-right: 1rem;
+}
+
+td {
+  text-align: left;
 }
 
 /*# sourceMappingURL=poll.css.map */

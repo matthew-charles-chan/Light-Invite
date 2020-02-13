@@ -27,7 +27,7 @@
     <div id='result'>
       <header>
           <h1 id='extraPadding'>
-            Event Results
+            Your Event Results
           </h1>
       </header>
 
@@ -48,11 +48,10 @@
           <% dates.forEach(date => { %>
           <% let { start_time, end_time, yes_count, no_count } = date; %>
           <li>
-            YES : <%= yes_count%> NO: <%= no_count%>
-            <label for="time">
+            <label for="yes">YES : <%= yes_count%></label>
+            <label for="no">NO: <%= no_count%></label>
               <%= start_time %> Until <%= end_time %>
-            </label>
-            </li>
+           </li>
           <% }); %>
       </ul>
       <div id="grid">
