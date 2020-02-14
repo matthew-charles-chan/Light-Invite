@@ -17,7 +17,7 @@ module.exports = (db) => {
   router.get('/:id/poll/', async (req,res) => {
     let auth = req.params.id;
     const user = await getUserByUserId(auth, db)
-    console.log(user.name)
+    console.log(user)
     await getStartEnd(auth, db)
     .then(result => {
       let templateVars = {dates: result, user_id: auth, user_name: user.name, email: user.email }
@@ -38,6 +38,7 @@ module.exports = (db) => {
   router.get('/:id/pollResult', async (req, res) => {
     console.log('first');
     let user_id = req.params.id;
+    console.log(user_id);
     let event_id = await getEventIdWithUserId(user_id, db);
     console.log(event_id);
     let vote = await checkIfVoted(event_id, db);
@@ -132,20 +133,24 @@ module.exports = (db) => {
     let dates = req.body;
     let user_id = req.params.id;
     let user= await getUserByUserId(user_id, db)
-    if (!user.name) {
-      let { name } = req.body;
-      updateNameByUserId(name, user_id, db)
-      .then(result => result)
-      .catch(err => console.log(err));
-    }
-    for(const date in dates){
-      DeleteVote(date, user_id, db);
-      if(dates[date] == 1){
-        makeAvailable(date, user_id, db);
+    try {
+      if (!user.name) {
+        let { name } = req.body;
+        await updateNameByUserId(name, user_id, db)
+        // .then(result => result)
+        // .catch(err => console.log(err));
       }
-      else if(dates[date] == 0){
-        notAvailable(date, user_id, db);
+      for(const date in dates){
+        await DeleteVote(date, user_id, db);
+        if(dates[date] == 1){
+          await makeAvailable(date, user_id, db);
+        }
+        else if(dates[date] == 0){
+          await notAvailable(date, user_id, db);
+        }
       }
+    } catch (error) {
+      console.log(error);
     }
     return res.redirect(`/event/${user_id}/pollResult`);
   });
