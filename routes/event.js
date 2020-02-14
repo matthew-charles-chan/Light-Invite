@@ -125,8 +125,8 @@ module.exports = (db) => {
         sendMail(email, user_id)
       });
     });
-    let result = await creatorId(event_id, db)
-    res.redirect(`/event/${result}/pollResult`);
+    creatorId(event_id, db)
+    .then (result => res.redirect(`/event/${result}/pollResult`));
   });
 
   router.post('/:id/poll', async (req, res) => {
