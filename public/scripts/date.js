@@ -6,12 +6,6 @@ import bootstrapPlugin from '@fullcalendar/bootstrap';
 import { Calendar } from '@fullcalendar/core';
 const moment = require('moment');
 
-const addDate = (dateStr) => {
-  $.post('/event/date', {date: dateStr, id: id})
-  .done(res => console.log(res))
-  .fail(err => console.log(err));
-}
-
 $(() =>{
   /* initialize the external events
   -----------------------------------------------------------------*/
@@ -67,6 +61,12 @@ $(() =>{
     }
   });
   calendar.render();
+
+  const addDate = (dateStr) => {
+    $.post('/event/date', {date: dateStr, id: id})
+    .done(res => console.log(res))
+    .fail(err => console.log(err));
+  }
 
 });
 
