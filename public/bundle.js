@@ -32080,12 +32080,6 @@ __webpack_require__.r(__webpack_exports__);
 
 const moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
-const addDate = (dateStr) => {
-  $.post('/event/date', {date: dateStr, id: id})
-  .done(res => console.log(res))
-  .fail(err => console.log(err));
-}
-
 $(() =>{
   /* initialize the external events
   -----------------------------------------------------------------*/
@@ -32140,8 +32134,12 @@ $(() =>{
       return true;
     }
   });
+  const addDate = (dateStr) => {
+    $.post('/event/date', {date: dateStr, id: id})
+    .done(res => console.log(res))
+    .fail(err => console.log(err));
+  }
   calendar.render();
-
 });
 
 
