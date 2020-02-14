@@ -126,7 +126,7 @@ module.exports = (db) => {
       });
     });
     creatorId(event_id, db)
-    .then(result => res.redirect(`/event/${result}/pollResult`));
+    .then (result => res.redirect(`/event/${result}/pollResult`));
   });
 
   router.post('/:id/poll', async (req, res) => {
