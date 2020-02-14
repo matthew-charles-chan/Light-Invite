@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-mode:"production",
+mode:"development",
 devtool:"source-map",
   entry: './public/scripts/date.js',
   output: {
